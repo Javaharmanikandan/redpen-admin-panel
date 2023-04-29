@@ -46,6 +46,10 @@ import Events from "layouts/Events";
 import CreateEvents from "layouts/Events/CreateEvents";
 import CreatePastEvents from "layouts/Events/CreatePastEvents";
 import CreateUpcomingEvents from "layouts/Events/CreateUpcomingEvents";
+import CreateProducts from "layouts/Shops/CreateProducts";
+import CreateShopMainCategory from "layouts/Shops/CreateShopMainCategory";
+import CreateShopSubCategory from "layouts/Shops/CreateShopSubCategory";
+import SignIn from "layouts/authentication/sign-in";
 
 
 const routes = [
@@ -90,14 +94,35 @@ const routes = [
     noCollapse: true,
     protected: true,
   },
+  {
+    type: "collapse",
+    name: "Shop Level 1 Category",
+    key: "create-shop-category",
+    route: "/create-shop-category",
+    icon: <Shop size="18px" />,
+    component: <CreateShopMainCategory />,
+    noCollapse: true,
+    protected: true,
+  },
+
+  {
+    type: "collapse",
+    name: "Shop Level 2 Category",
+    key: "create-shop-category-level-2",
+    route: "/create-shop-category-level-2",
+    icon: <Shop size="18px" />,
+    component: <CreateShopSubCategory />,
+    noCollapse: true,
+    protected: true,
+  },
 
   {
     type: "collapse",
     name: "Shop",
-    key: "shop",
-    route: "/shop",
+    key: "create-products",
+    route: "/create-products",
     icon: <Shop size="18px" />,
-    component: <Events />,
+    component: <CreateProducts />,
     noCollapse: true,
     protected: true,
   },
@@ -135,7 +160,15 @@ const routes = [
 
 
   
-
+  {
+    type: "title",
+    name: "Sign In",
+    key: "sign-in",
+    route: "/authentication/sign-in",
+    icon: <Shop size="12px" />,
+    component: <SignIn />,
+    noCollapse: true,
+  },
 
   // { type: "title", title: "Account Pages", key: "account-pages" },
   // {

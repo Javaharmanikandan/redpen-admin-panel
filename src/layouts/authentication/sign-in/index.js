@@ -62,27 +62,27 @@ function SignUp() {
     
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     console.log(formData)
     e.preventDefault();
-    AuthApi.SignIn(formData)
-      .then((response) => {
-        console.log(response.data)
+
+    const response = await AuthApi.Postmethod(
+      "/auth/admin_login",
+      formData
+    );
+
+    console.log(response)
 
        if (response.data.success) {
-        localStorage.setItem('adminLogin',true)
+        localStorage.setItem('adminLoginRed',true)
         alert("Login Success")
           return navigate("/dashboard");
         } else {
          alert("Invalid Account Details")
         }
-      })
-      .catch((error) => {
-        if (error.response) {
-          return setError(error.response.data.msg);
-        }
-        return setError("There has been an error.");
-      });
+      
+     
+        
   };
 
   const handleRedirect = () => navigate("/dashboard");

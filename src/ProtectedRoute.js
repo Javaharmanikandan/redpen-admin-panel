@@ -5,14 +5,14 @@ import { useNavigate, Outlet } from 'react-router-dom';
 export const ProtectedRoute = () => {
   const navigate = useNavigate();
   let { user } = useAuth();
-//  const status= localStorage.getItem('adminLogin')
+ const status= localStorage.getItem('adminLoginRed')
 
     return (<>
-      {/* {(!status  || status === "") ? (
+      {(!status  || status === "") ? (
      
        navigate("/authentication/sign-in")
-      ) : ( */}
+      ) : (
         <Outlet />
-      {/* )}  */}
+      )} 
   </>);
 };

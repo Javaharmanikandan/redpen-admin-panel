@@ -27,7 +27,7 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
-
+import brand from "assets/images/logo-ct.svg";
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import Socials from "layouts/authentication/components/Socials";
@@ -108,12 +108,15 @@ function SignUp() {
          
        
           <SoftBox pt={2} pb={3} px={3} sx={{margin:2}}>
+
+           
             <SoftBox component="form" role="form">
+           <center> <img src={brand} style={{marginTop:10,marginBottom:30}}/></center>
               <SoftBox mb={2}>
                 <SoftInput
                   type="text"
                   name="username"
-                  placeholder="Name"
+                  placeholder="User Name"
                   onChange={handleFormData}
                 />
               </SoftBox>

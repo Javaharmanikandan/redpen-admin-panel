@@ -71,11 +71,18 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   }, [dispatch, location]);
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
+  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href,child }) => {
+
+    console.log(child ," Child")
     let returnValue;
+ 
 
     if (type === "collapse") {
+
+      console.log(href,"Href");
       returnValue = href ? (
+
+      
         <Link
           href={href}
           key={key}
@@ -144,7 +151,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           </SoftTypography>
         </SoftBox>
         <SoftBox component={NavLink} to="/" display="flex" alignItems="center">
-          {brand && <SoftBox component="img" src={brand} alt="Soft UI Logo" width="9rem" />}
+          {brand && <SoftBox component="img" src={brand} alt="Redpen Admin" width="9rem" />}
           <SoftBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}

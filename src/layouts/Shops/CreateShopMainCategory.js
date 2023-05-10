@@ -39,12 +39,12 @@ function CreateShopMainCategory() {
   const onSubmitSub = async (data) => {
 
     const payLoad = {
-      chip_color: data.chip_color,
-      main_category_name: data.main_category,
+      category_level: data.category_level,
+      category_name: data.category_name,
     };
 
     const dataPost = await AuthApi.Postmethod(
-      "/create-shop-main-category",
+      "/create-shop-category",
       payLoad
     );
 
@@ -76,7 +76,7 @@ function CreateShopMainCategory() {
               alignItems="center"
               p={3}
             >
-              <SoftTypography variant="h6">Create Shop Main Category (Level 1 Category)</SoftTypography>
+              <SoftTypography variant="h6">Create Shop Category </SoftTypography>
             </SoftBox>
             <form
               key={2}
@@ -94,16 +94,16 @@ function CreateShopMainCategory() {
                         variant="caption"
                         fontWeight="bold"
                       >
-                        Shop Main Category *
+                        Shop  Category *
                       </SoftTypography>
                     </SoftBox>
                     <SoftInput
-                      {...registerSub("main_category", { required: true })}
+                      {...registerSub("category_name", { required: true })}
                       type="text"
-                      name="main_category"
-                      placeholder=" Category Name(Level 1 Filter)"
+                      name="category_name"
+                      placeholder=" Category Name"
                     />
-                    {errors.main_category && (
+                    {errors.category_name && (
                       <span className="Errorspan">
                         * Please fill this field!
                       </span>
@@ -112,27 +112,38 @@ function CreateShopMainCategory() {
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                  <SoftBox mb={2}>
+                <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
                         component="label"
                         variant="caption"
                         fontWeight="bold"
                       >
-                        Chip Color *
+                        Category Level *
                       </SoftTypography>
                     </SoftBox>
-                    <SoftInput
-                      {...registerSub("chip_color", { required: true })}
-                      type="color"
-                      name="chip_color"
-                      placeholder="Sub Category Name"
-                    />
-                    {errors.chip_color && (
+                    <select
+                      className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
+                      name="gender"
+                      {...registerSub("category_level", { required: true })}
+                    >
+                      <option value="" selected disabled hidden>
+                        Select  Category level
+                      </option>
+                      <option value={1} >
+                        Level 1
+                      </option>
+                      <option value={2}>
+                       Level 2
+                      </option>
+
+              
+                    </select>
+
+                    {errors.category_level && (
                       <span className="Errorspan">
                         * Please fill this field!
-                      </span>
-                    )}
+                      </span>)}
                   </SoftBox>
                 </Grid>
 

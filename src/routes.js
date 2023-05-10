@@ -96,7 +96,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Shop Level 1 Category",
+    name: "Shop Category",
     key: "create-shop-category",
     route: "/create-shop-category",
     icon: <Shop size="18px" />,
@@ -104,18 +104,6 @@ const routes = [
     noCollapse: true,
     protected: true,
   },
-
-  {
-    type: "collapse",
-    name: "Shop Level 2 Category",
-    key: "create-shop-category-level-2",
-    route: "/create-shop-category-level-2",
-    icon: <Shop size="18px" />,
-    component: <CreateShopSubCategory />,
-    noCollapse: true,
-    protected: true,
-  },
-
   {
     type: "collapse",
     name: "Shop",
@@ -145,6 +133,15 @@ const routes = [
     component: <Events />,
     noCollapse: false,
     protected: true,
+    child: [
+      {
+        path: "/create/product",
+        element: <CreateProducts />,
+        state: "dashboard.default",
+        sidebarProps: {
+          displayText: "Create Shop"
+        },
+      },]
   },
   
   {

@@ -98,7 +98,7 @@ function CreateProducts() {
     // };
 
     const dataGet = await AuthApi.GetMethod(
-      "/get-shop-main-category"
+      "/get-shop-category"
     );
 
     console.log(dataGet)
@@ -111,8 +111,7 @@ function CreateProducts() {
   const onSubmit = async (data) => {
     let formData = new FormData(); //formdata object
     formData.append("product_image", data.product_image[0]);
-    formData.append("main_category", data.main_category_name);
-    formData.append("sub_category", data.sub_category_name);
+    formData.append("product_category", data.product_category);
     formData.append("product_name", data.product_title);
     formData.append("product_price", data.product_price);
     formData.append("product_description", data.product_description);
@@ -183,24 +182,24 @@ function CreateProducts() {
                         variant="caption"
                         fontWeight="bold"
                       >
-                        Product Main Category (Level 1 Category)<span className="Errorspan">*</span>
+                        Product  Category <span className="Errorspan">*</span>
                       </SoftTypography>
                     </SoftBox>
 
                     <select
                       className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
-                      name="main_category_name"
+                      name="product_category"
                      
-                      {...register("main_category_name", {  onChange: (e) => {onChangeHandler(e)},required: true })}
+                      {...register("product_category", {  onChange: (e) => {onChangeHandler(e)},required: true })}
                     >
                       <option value="" selected>
-                        Select Product Main Category
+                        Select Product  Category
                       </option>
                       {MainCategoryData &&
                         MainCategoryData.map((result, index) => {
                           return (
                             <option value={result.id}>
-                              {result.main_category_name}
+                              {result.category_name}
                             </option>
                           );
                         })}
@@ -213,47 +212,12 @@ function CreateProducts() {
                   </SoftBox>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={6} lg={6}>
-                  <SoftBox mb={2}>
-                    <SoftBox mb={1} ml={0.5}>
-                      <SoftTypography
-                        component="label"
-                        variant="caption"
-                        fontWeight="bold"
-                      >
-                        Product Sub Category (Level 2 Category)<span className="Errorspan">*</span>
-                      </SoftTypography>
-                    </SoftBox>
-
-                    <select
-                      className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
-                      name="va"
-                      {...register("sub_category_name", { required: true })}
-                    >
-                      <option value="" selected>
-                        Select Product sub Category
-                      </option>
-                      {subCategoryData &&
-                        subCategoryData.map((result, index) => {
-                          return (
-                            <option value={result.id}>
-                              {result.sub_category_name}
-                            </option>
-                          );
-                        })}
-                    </select>
-                    {errors.sub_category_name && (
-                      <span className="Errorspan">
-                        * Please fill this field!
-                      </span>
-                    )}
-                  </SoftBox>
-                </Grid>
+            
 
     
 
 
-                <Grid item xs={12} sm={12} md={12} lg={12}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography

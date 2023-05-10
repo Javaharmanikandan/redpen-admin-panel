@@ -99,11 +99,14 @@ export default function App() {
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
+
       if (route.collapse) {
         return getRoutes(route.collapse);
       }
 
       if (route.route) {
+
+        console.log(route.route)
         if (route.protected) {
           return (
             <Route key={route.key} element={<ProtectedRoute />}>

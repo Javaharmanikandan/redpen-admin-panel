@@ -37,7 +37,7 @@ function ViewBlog() {
     useEffect(() => {
         getDetails();
         Triger();
-    }, [])
+    }, [data])
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-blog');
         setData(response.data.data);
@@ -65,7 +65,6 @@ function ViewBlog() {
                 toast.error(dataPost.data.message);
             }
         }
-        getDetails();
     }
     return (
         <DashboardLayout>

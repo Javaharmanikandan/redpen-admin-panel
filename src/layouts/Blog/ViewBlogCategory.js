@@ -37,7 +37,7 @@ function ViewBlogCategory() {
     useEffect(() => {
         getDetails();
         Triger();
-    }, [])
+    }, [category])
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-blog-category');
         setCategory(response.data.data);
@@ -67,7 +67,6 @@ function ViewBlogCategory() {
                 toast.error(dataPost.data.message);
             }
         }
-        getDetails();
     }
     return (
         <DashboardLayout>

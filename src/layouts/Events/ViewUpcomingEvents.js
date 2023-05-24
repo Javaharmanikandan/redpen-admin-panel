@@ -37,7 +37,7 @@ function ViewUpcomingEvents() {
     useEffect(() => {
         getDetails();
         Triger();
-    }, [])
+    }, [data])
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-upcoming-events');
         setData(response.data.data);
@@ -65,7 +65,6 @@ function ViewUpcomingEvents() {
                 toast.error(dataPost.data.message);
             }
         }
-        getDetails();
     }
     return (
         <DashboardLayout>

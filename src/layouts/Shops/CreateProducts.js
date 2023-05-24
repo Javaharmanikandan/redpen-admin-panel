@@ -20,11 +20,10 @@ import { ToastContainer, toast } from "react-toastify";
 import AuthApi from "api/auth";
 
 function CreateProducts() {
-  const [subCategoryData, setSubCategoryData] = useState([]);
   const [MainCategoryData, setMainCategoryData] = useState([]);
 
   const [inputList, setInputList] = useState([
-    { also_content: "" },
+    { also_receive: "" },
   ]);
 
   const [inputListFaq, setInputListFaq] = useState([{ question: "" ,answer:"" }]);
@@ -49,7 +48,7 @@ function CreateProducts() {
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { also_content: "" }]);
+    setInputList([...inputList, { also_receive: "" }]);
   };
 
 
@@ -115,7 +114,8 @@ function CreateProducts() {
     formData.append("product_name", data.product_title);
     formData.append("product_price", data.product_price);
     formData.append("product_description", data.product_description);
-    formData.append("also_content", JSON.stringify(inputList));
+    formData.append("product_url", data.product_url);
+    formData.append("also_receive", JSON.stringify(inputList));
     formData.append("faq", JSON.stringify(inputListFaq));
 
     console.log(inputListFaq)
@@ -129,25 +129,11 @@ function CreateProducts() {
       toast.error(dataPost.data.message);
     }
     reset();
-    setInputList([{ also_content: "" }])
+    setInputList([{ also_receive: "" }])
   };
 
 
-  const onChangeHandler = async(event) => {
-    // 👇 Get input value from "event"
-  const id= event.target.value
 
-
-    const payload = {
-      main_category_id: id,
-    };
-
-    const dataGet = await AuthApi.Postmethod(
-      "/get-shop-sub-category",payload
-    );
-
-    setSubCategoryData(dataGet.data.data);
-  };
 
   
 
@@ -242,7 +228,7 @@ function CreateProducts() {
                   </SoftBox>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={6} lg={6}>
+                <Grid item xs={12} sm={12} md={4} lg={4}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -267,7 +253,7 @@ function CreateProducts() {
                   </SoftBox>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={6} lg={6}>
+                <Grid item xs={12} sm={12} md={4} lg={4}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -283,6 +269,31 @@ function CreateProducts() {
                       type="text"
                       name="product_price"
                       placeholder=" ₹ Product Price"
+                    />
+                    {errors.event_location && (
+                      <span className="Errorspan">
+                        * Please fill this field!
+                      </span>
+                    )}
+                  </SoftBox>
+                </Grid>
+
+                <Grid item xs={12} sm={12} md={4} lg={4}>
+                  <SoftBox mb={2}>
+                    <SoftBox mb={1} ml={0.5}>
+                      <SoftTypography
+                        component="label"
+                        variant="caption"
+                        fontWeight="bold"
+                      >
+                        Product URL<span className="Errorspan">*</span>
+                      </SoftTypography>
+                    </SoftBox>
+                    <SoftInput
+                      {...register("product_url", { required: true })}
+                      type="text"
+                      name="product_url"
+                      placeholder="Product URL"
                     />
                     {errors.event_location && (
                       <span className="Errorspan">
@@ -343,7 +354,7 @@ function CreateProducts() {
                         <div style={{ display: "flex", padding: 10 }}>
                           <SoftInput
                             type="text"
-                            name="also_content"
+                            name="also_receive"
                             placeholder="Content"
                             value={x.stepHeading}
                             onChange={(e) => handleInputChange(e, i)}

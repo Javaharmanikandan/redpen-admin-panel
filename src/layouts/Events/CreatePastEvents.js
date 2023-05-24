@@ -21,6 +21,7 @@ import AuthApi from "api/auth";
 
 function CreatePastEvents() {
 
+  const [load, setLoad] = useState(false);
   const [subCategoryData, setSubCategoryData] = useState([]);
 
   const {
@@ -52,11 +53,11 @@ function CreatePastEvents() {
 
   const onSubmit = async (data) => {
 
+    setLoad(true);
     const payLoad = {
       event_category: data.event_category,
       event_date: data.event_date,
-      event_title: data.event_title,
-      youtube_url: data.event_link,
+      event_youtube_url: data.event_youtube_url,
     };
 
     const dataPost = await AuthApi.Postmethod("/create-past-events", payLoad);
@@ -91,7 +92,7 @@ function CreatePastEvents() {
               onSubmit={handleSubmit(onSubmit)}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={12} md={6} lg={6}>
+                <Grid item xs={12} sm={12} md={3} lg={3}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -105,7 +106,7 @@ function CreatePastEvents() {
 
                     <select
                       className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
-                      name="gender"
+                      name="event_category"
                       {...register("event_category", { required: true })}
                     >
                       <option value="" selected>
@@ -128,7 +129,7 @@ function CreatePastEvents() {
                   </SoftBox>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={6} lg={6}>
+                <Grid item xs={12} sm={12} md={3} lg={3}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -143,7 +144,7 @@ function CreatePastEvents() {
                       {...register("event_date", { required: true })}
                       type="date"
                       name="event_date"
-                      placeholder="Event Youtube Link"
+                      placeholder="Event Date"
                     />
                     {errors.event_date && (
                       <span className="Errorspan">
@@ -153,30 +154,8 @@ function CreatePastEvents() {
                   </SoftBox>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={6} lg={6}>
-                  <SoftBox mb={2}>
-                    <SoftBox mb={1} ml={0.5}>
-                      <SoftTypography
-                        component="label"
-                        variant="caption"
-                        fontWeight="bold"
-                      >
-                        Event Title <span className="Errorspan">*</span>
-                      </SoftTypography>
-                    </SoftBox>
-                    <SoftInput
-                      {...register("event_title", { required: true })}
-                      type="text"
-                      name="event_title"
-                      placeholder="Event Title "
-                    />
-                    {errors.event_title && (
-                      <span className="Errorspan">
-                        * Please fill this field!
-                      </span>
-                    )}
-                  </SoftBox>
-                </Grid>
+
+           
 
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                   <SoftBox mb={2}>
@@ -190,12 +169,12 @@ function CreatePastEvents() {
                       </SoftTypography>
                     </SoftBox>
                     <SoftInput
-                      {...register("event_link", { required: true })}
+                      {...register("event_youtube_url", { required: true })}
                       type="text"
-                      name="event_link"
+                      name="event_youtube_url"
                       placeholder="Event Youtube Link"
                     />
-                    {errors.event_link && (
+                    {errors.event_youtube_url && (
                       <span className="Errorspan">
                         * Please fill this field!
                       </span>

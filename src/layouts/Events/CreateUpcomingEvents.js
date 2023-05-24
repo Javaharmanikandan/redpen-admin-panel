@@ -76,14 +76,17 @@ function CreateUpcomingEvents() {
   const onSubmit = async (data) => {
     let formData = new FormData(); //formdata object
 
-    console.log(data.event_image[0]);
     formData.append("image", data.event_image[0]);
+    formData.append("mobile_banner", data.mobile_banner[0]);
+    formData.append("desktop_banner", data.desktop_banner[0]);
     formData.append("event_category", data.event_category);
     formData.append("event_date", data.event_date);
     formData.append("event_time", data.event_time);
     formData.append("event_title", data.event_title);
     formData.append("event_location", data.event_location);
-    formData.append("event_about", data.about_event);
+    formData.append("event_about", data.event_about);
+    formData.append("event_sub_title", data.event_sub_title);
+    formData.append("event_url", data.event_url);
     formData.append("steps", JSON.stringify(inputList));
 
     const dataPost = await AuthApi.PostmethodWithFile(
@@ -122,7 +125,7 @@ function CreateUpcomingEvents() {
               onSubmit={handleSubmit(onSubmit)}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={12} md={4} lg={4}>
+                <Grid item xs={12} sm={12} md={3} lg={3}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -159,7 +162,35 @@ function CreateUpcomingEvents() {
                   </SoftBox>
                 </Grid>
 
+               
+
+
                 <Grid item xs={12} sm={12} md={4} lg={4}>
+                  <SoftBox mb={2}>
+                    <SoftBox mb={1} ml={0.5}>
+                      <SoftTypography
+                        component="label"
+                        variant="caption"
+                        fontWeight="bold"
+                      >
+                        Event URL <span className="Errorspan">*</span>
+                      </SoftTypography>
+                    </SoftBox>
+                    <SoftInput
+                      {...register("event_url", { required: true })}
+                      type="text"
+                      name="event_url"
+                      placeholder="Event URL"
+                    />
+                    {errors.event_url && (
+                      <span className="Errorspan">
+                        * Please fill this field!
+                      </span>
+                    )}
+                  </SoftBox>
+                </Grid>
+
+                <Grid item xs={12} sm={12} md={3} lg={3}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -174,7 +205,7 @@ function CreateUpcomingEvents() {
                       {...register("event_date", { required: true })}
                       type="date"
                       name="event_date"
-                      placeholder="Event Youtube Link"
+                      placeholder="Event Date"
                     />
                     {errors.event_date && (
                       <span className="Errorspan">
@@ -184,7 +215,7 @@ function CreateUpcomingEvents() {
                   </SoftBox>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={4} lg={4}>
+                <Grid item xs={12} sm={12} md={2} lg={2}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -199,7 +230,7 @@ function CreateUpcomingEvents() {
                       {...register("event_time", { required: true })}
                       type="time"
                       name="event_time"
-                      placeholder="Event Youtube Link"
+                      placeholder="Event Time"
                     />
                     {errors.event_time && (
                       <span className="Errorspan">
@@ -224,7 +255,10 @@ function CreateUpcomingEvents() {
                       {...register("event_title", { required: true })}
                       type="text"
                       name="event_title"
-                      placeholder="Event Title "
+                      inputProps={{
+                        maxLength: 85,
+                      }}
+                      placeholder="Title "
                     />
                     {errors.event_title && (
                       <span className="Errorspan">
@@ -249,7 +283,7 @@ function CreateUpcomingEvents() {
                       {...register("event_image", { required: true })}
                       type="file"
                       name="event_image"
-                      placeholder="Event Youtube Link"
+                      placeholder="Upload Image"
                     />
                     {errors.event_image && (
                       <span className="Errorspan">
@@ -284,6 +318,80 @@ function CreateUpcomingEvents() {
                   </SoftBox>
                 </Grid>
 
+                <Grid item xs={12} sm={12} md={3} lg={3}>
+                  <SoftBox mb={2}>
+                    <SoftBox mb={1} ml={0.5}>
+                      <SoftTypography
+                        component="label"
+                        variant="caption"
+                        fontWeight="bold"
+                      >
+                        Mobile Banner Image <span className="Errorspan">*</span>
+                      </SoftTypography>
+                    </SoftBox>
+                    <SoftInput
+                      {...register("mobile_banner", { required: true })}
+                      type="file"
+                      name="mobile_banner"
+                      placeholder="Upload Image"
+                    />
+                    {errors.mobile_banner && (
+                      <span className="Errorspan">
+                        * Please fill this field!
+                      </span>
+                    )}
+                  </SoftBox>
+                </Grid>
+
+                <Grid item xs={12} sm={12} md={3} lg={3}>
+                  <SoftBox mb={2}>
+                    <SoftBox mb={1} ml={0.5}>
+                      <SoftTypography
+                        component="label"
+                        variant="caption"
+                        fontWeight="bold"
+                      >
+                        Desktop Banner Image <span className="Errorspan">*</span>
+                      </SoftTypography>
+                    </SoftBox>
+                    <SoftInput
+                      {...register("desktop_banner", { required: true })}
+                      type="file"
+                      name="desktop_banner"
+                      placeholder="Upload image"
+                    />
+                    {errors.desktop_banner && (
+                      <span className="Errorspan">
+                        * Please fill this field!
+                      </span>
+                    )}
+                  </SoftBox>
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <SoftBox mb={2}>
+                    <SoftBox mb={1} ml={0.5}>
+                      <SoftTypography
+                        component="label"
+                        variant="caption"
+                        fontWeight="bold"
+                      >
+                        Event Sub Title (H2) <span className="Errorspan">*</span>
+                      </SoftTypography>
+                    </SoftBox>
+                    <SoftInput
+                      {...register("event_sub_title", { required: true })}
+                      type="text"
+                      name="event_sub_title"
+                      placeholder="Sub title"
+                    />
+                    {errors.event_sub_title && (
+                      <span className="Errorspan">
+                        * Please fill this field!
+                      </span>
+                    )}
+                  </SoftBox>
+                </Grid>
+
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
@@ -306,10 +414,10 @@ function CreateUpcomingEvents() {
                         fontSize: "16px",
                         borderRadius: 10,
                       }}
-                      name="about_event"
-                      {...register("about_event", { required: true })}
+                      name="event_about"
+                      {...register("event_about", { required: true })}
                     ></textarea>
-                    {errors.about_event && (
+                    {errors.event_about && (
                       <span className="Errorspan">
                         * Please fill this field!
                       </span>

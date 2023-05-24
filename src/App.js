@@ -106,7 +106,6 @@ export default function App() {
 
       if (route.route) {
 
-        console.log(route.route)
         if (route.protected) {
           return (
             <Route key={route.key} element={<ProtectedRoute />}>

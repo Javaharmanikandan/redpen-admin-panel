@@ -21,7 +21,7 @@ import { ToastContainer, toast } from "react-toastify";
 import AuthApi from "api/auth";
 
 
-function CreateShopSubCategory() {
+function CreateEventCategory() {
   
 
   const [mainCategoryData,setMainCategoryData] =useState([]);
@@ -43,7 +43,7 @@ function CreateShopSubCategory() {
 
   const getMainCategoryData = async () => {
 
-    const dataGet = await AuthApi.GetMethod("/get-shop-main-category");
+    const dataGet = await AuthApi.GetMethod("/get-events-main-category");
    
     setMainCategoryData(dataGet.data.data);
 
@@ -61,11 +61,10 @@ function CreateShopSubCategory() {
     const payLoad = {
       main_category: data.MainCategory,
       sub_category_name: data.SubCategory,
-      chip_color: data.chip_color,
     };
 
     const dataPost = await AuthApi.Postmethod(
-      "/create-shop-sub-category",
+      "/create-events-sub-category",
       payLoad
     );
 
@@ -97,7 +96,7 @@ function CreateShopSubCategory() {
               alignItems="center"
               p={3}
             >
-              <SoftTypography variant="h6">Create Shop Sub Category (Level 2 Category)</SoftTypography>
+              <SoftTypography variant="h6">Create Sub Category</SoftTypography>
             </SoftBox>
             <form
               key={2}
@@ -105,7 +104,7 @@ function CreateShopSubCategory() {
               onSubmit={handleSubmitSub(onSubmitSub)}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={12} md={5} lg={5}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -139,7 +138,7 @@ function CreateShopSubCategory() {
                   </SoftBox>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={5} lg={5}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -163,34 +162,6 @@ function CreateShopSubCategory() {
                     )}
                   </SoftBox>
                 </Grid>
-
-                <Grid item xs={12} sm={12} md={2} lg={2}>
-                  <SoftBox mb={2}>
-                    <SoftBox mb={1} ml={0.5}>
-                      <SoftTypography
-                        component="label"
-                        variant="caption"
-                        fontWeight="bold"
-                      >
-                       Chip Color *
-                      </SoftTypography>
-                    </SoftBox>
-                    <SoftInput
-                      {...registerSub("chip_color", { required: true })}
-                      type="color"
-                      name="chip_color"
-                      placeholder="Chip Color"
-                    />
-                    {errors.chip_color && (
-                      <span className="Errorspan">
-                        * Please fill this field!
-                      </span>
-                    )}
-                  </SoftBox>
-                </Grid>
-
-
-
 
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                   <Box
@@ -224,4 +195,4 @@ function CreateShopSubCategory() {
   );
 }
 
-export default CreateShopSubCategory;
+export default CreateEventCategory;

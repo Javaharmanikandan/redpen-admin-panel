@@ -8,7 +8,12 @@ class AuthApi {
 
       return axios.post(API_SERVER+url ,payload);
 
-    }
+  }
+  static Deletemethod = (url) => {
+
+    return axios.delete(API_SERVER + url);
+
+  }
     static PostmethodWithFile = (url,payload) =>{
 
    

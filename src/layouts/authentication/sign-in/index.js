@@ -76,7 +76,7 @@ function SignUp() {
        if (response.data.success) {
         localStorage.setItem('adminLoginRed',true)
         alert("Login Success")
-          return navigate("/dashboard");
+         return navigate("/event-category");
         } else {
          alert("Invalid Account Details")
         }

@@ -43,18 +43,47 @@ Coded by www.creative-tim.com
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
 import Events from "layouts/Events";
-import CreateEvents from "layouts/Events/CreateEvents";
 import CreatePastEvents from "layouts/Events/CreatePastEvents";
 import CreateUpcomingEvents from "layouts/Events/CreateUpcomingEvents";
+import UpdateUpcomigEvents from "layouts/Events/UpdateUpcomigEvents";
+
 import CreateProducts from "layouts/Shops/CreateProducts";
 import CreateShopMainCategory from "layouts/Shops/CreateShopMainCategory";
-import CreateShopSubCategory from "layouts/Shops/CreateShopSubCategory";
+import UpdateShopMainCategory from "layouts/Shops/UpdateShopMainCategory";
+
+import CreateBlogCategory from "layouts/Blog/CreateBlogCategory";
+import UpdateBlogCategory from "layouts/Blog/UpdateBlogCategory";
+import CreateBlog from "layouts/Blog/CreateBlog";
+import ViewBlog from "layouts/Blog/ViewBlog";
+import CreateVideoCategory from "layouts/Video/CreateVideoCategory";
+import UpdateVideoCategory from "layouts/Video/UpdateVideoCategory";
+import CreateVideo from "layouts/Video/CreateVideo";
+import UpdateVideo from "layouts/Video/UpdateVideo";
+
+
+
 import SignIn from "layouts/authentication/sign-in";
+import ViewShopMainCategory from "layouts/Shops/ViewShopMainCategory";
+import ViewVideoCategory from "layouts/Video/ViewVideoCategory";
+import ViewBlogCategory from "layouts/Blog/ViewBlogCategory";
+import ViewVideo from "layouts/Video/ViewVideo";
+import UpdateBlog from "layouts/Blog/UpdateBlog";
+import UpdateProducts from "layouts/Shops/UpdateProducts";
+import ViewProducts from "layouts/Shops/ViewProducts";
+import ViewEventCategory from "layouts/Events/ViewEventCategory";
+import CreateEventCategory from "layouts/Events/CreateEventCategory";
+import UpdateEventCategory from "layouts/Events/UpdateEventCategory";
+import UpdatePastEvents from "layouts/Events/UpdatePastEvents";
+import ViewPastEvents from "layouts/Events/ViewPastEvents";
+import ViewUpcomingEvents from "layouts/Events/ViewUpcomingEvents";
+import ViewEventBanner from "layouts/Events/ViewEventBanner";
+import CreateEventBanner from "layouts/Events/CreateEventBanner";
+import UpdateEventBanner from "layouts/Events/UpdateEventBanner";
 
 
 const routes = [
   {
-    type: "collapse",
+    type: "title",
     name: "Dashboard",
     key: "dashboard",
     route: "/dashboard",
@@ -65,18 +94,76 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Event Category ",
-    key: "create-event-category",
-    route: "/create-event-category",
+    name: "Event sub category ",
+    key: "event-sub-category",
+    route: "/event-category",
     icon: <Shop size="18px" />,
-    component: <CreateEvents />,
+    component: <ViewEventCategory />,
     noCollapse: true,
     protected: true,
   },
-
+  {
+    type: "title",
+    name: "Event sub category ",
+    key: "create event-category",
+    route: "/create-event-category",
+    icon: <Shop size="18px" />,
+    component: <CreateEventCategory />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Update sub category ",
+    key: "update-event-category",
+    route: "/update-event-category/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdateEventCategory />,
+    noCollapse: true,
+    protected: true,
+  }, {
+    type: "collapse",
+    name: "Event banner",
+    key: "event-banner",
+    route: "/event-banner",
+    icon: <Shop size="18px" />,
+    component: <ViewEventBanner />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Event banner ",
+    key: "create event-banner",
+    route: "/create-event-banner",
+    icon: <Shop size="18px" />,
+    component: <CreateEventBanner />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Event banner",
+    key: "update-event-banner",
+    route: "/update-event-banner/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdateEventBanner />,
+    noCollapse: true,
+    protected: true,
+  },
   {
     type: "collapse",
-    name: "Past Events",
+    name: "Past events",
+    key: "past-events",
+    route: "/past-events",
+    icon: <Shop size="18px" />,
+    component: <ViewPastEvents />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Past events",
     key: "create-past-events",
     route: "/create-past-events",
     icon: <Shop size="18px" />,
@@ -85,8 +172,28 @@ const routes = [
     protected: true,
   },
   {
+    type: "title",
+    name: "Past events",
+    key: "update-past-events",
+    route: "/update-past-events/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdatePastEvents />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
     type: "collapse",
-    name: "Upcoming Events",
+    name: "Upcoming events",
+    key: "upcoming-events",
+    route: "/upcoming-events",
+    icon: <Shop size="18px" />,
+    component: <ViewUpcomingEvents />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Upcoming events",
     key: "create-upcoming-events",
     route: "/create-upcoming-events",
     icon: <Shop size="18px" />,
@@ -95,8 +202,28 @@ const routes = [
     protected: true,
   },
   {
+    type: "title",
+    name: "Upcoming events",
+    key: "update-upcoming-events",
+    route: "/update-upcoming-events/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdateUpcomigEvents />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
     type: "collapse",
-    name: "Shop Category",
+    name: "Shop category",
+    key: "shop-category",
+    route: "/shop-category",
+    icon: <Shop size="18px" />,
+    component: <ViewShopMainCategory />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Shop category",
     key: "create-shop-category",
     route: "/create-shop-category",
     icon: <Shop size="18px" />,
@@ -105,7 +232,27 @@ const routes = [
     protected: true,
   },
   {
+    type: "title",
+    name: "Update Shop Category",
+    key: "update-shop-category",
+    route: "/update-shop-category/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdateShopMainCategory />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
     type: "collapse",
+    name: "Shop",
+    key: "products",
+    route: "/products",
+    icon: <Shop size="18px" />,
+    component: <ViewProducts />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
     name: "Shop",
     key: "create-products",
     route: "/create-products",
@@ -115,12 +262,102 @@ const routes = [
     protected: true,
   },
   {
+    type: "title",
+    name: "Shop",
+    key: "update-products",
+    route: "/update-products/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdateProducts />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "collapse",
+    name: "Video Category",
+    key: "video category",
+    route: "/video-Category",
+    icon: <Shop size="18px" />,
+    component: <ViewVideoCategory />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Create Video Category",
+    key: "Create video category",
+    route: "/create-video-Category",
+    icon: <Shop size="18px" />,
+    component: <CreateVideoCategory />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Update Video Category",
+    key: "Update video category",
+    route: "/update-video-Category/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdateVideoCategory />,
+    noCollapse: true,
+    protected: true,
+  },
+    {
     type: "collapse",
     name: "Videos",
-    key: "videos",
+    key: "Videos",
     route: "/videos",
     icon: <Shop size="18px" />,
-    component: <Events />,
+    component: <ViewVideo />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Create Video",
+    key: "Create video",
+    route: "/create-video",
+    icon: <Shop size="18px" />,
+    component: <CreateVideo />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Videos",
+    key: "update-video",
+    route: "/update-video/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdateVideo />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "collapse",
+    name: "Blog Category",
+    key: "blog-category",
+    route: "/blog-category",
+    icon: <Shop size="18px" />,
+    component: <ViewBlogCategory />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Blog Category",
+    key: "create-blog-category",
+    route: "/create-blog-category",
+    icon: <Shop size="18px" />,
+    component: <CreateBlogCategory />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Update Category",
+    key: "update-blog-category",
+    route: "/update-blog-category/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdateBlogCategory />,
     noCollapse: true,
     protected: true,
   },
@@ -128,32 +365,62 @@ const routes = [
     type: "collapse",
     name: "Blogs",
     key: "blogs",
-    route: "/blogs",
+    route: "/blog",
     icon: <Shop size="18px" />,
-    component: <Events />,
-    noCollapse: false,
-    protected: true,
-    child: [
-      {
-        path: "/create/product",
-        element: <CreateProducts />,
-        state: "dashboard.default",
-        sidebarProps: {
-          displayText: "Create Shop"
-        },
-      },]
-  },
-  
-  {
-    type: "title",
-    name: "Create Events",
-    key: "events",
-    route: "/create-events",
-    icon: <Shop size="18px" />,
-    component: <CreateEvents />,
+    component: <ViewBlog />,
     noCollapse: true,
     protected: true,
   },
+  {
+    type: "title",
+    name: "Create Blogs",
+    key: "create-blog",
+    route: "/create-blog",
+    icon: <Shop size="18px" />,
+    component: <CreateBlog />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Update Blogs",
+    key: "update-blog",
+    route: "/update-blog/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdateBlog/>,
+    noCollapse: true,
+    protected: true,
+  },
+  // {
+  //   type: "collapse",
+  //   name: "Blogs",
+  //   key: "blogs",
+  //   route: "/blogs",
+  //   icon: <Shop size="18px" />,
+  //   component: <Events />,
+  //   noCollapse: false,
+  //   protected: true,
+  //   child: [
+  //     {
+  //       path: "/create/product",
+  //       element: <CreateProducts />,
+  //       state: "dashboard.default",
+  //       sidebarProps: {
+  //         displayText: "Create Shop"
+  //       },
+  //     },]
+  // },
+  
+  // {
+  //   type: "title",
+  //   name: "Create Events",
+  //   key: "events",
+  //   route: "/create-events",
+  //   icon: <Shop size="18px" />,
+  //   component: <CreateEvents />,
+  //   noCollapse: true,
+  //   protected: true,
+  // },
 
 
   

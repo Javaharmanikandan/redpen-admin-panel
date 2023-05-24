@@ -357,7 +357,7 @@ function CreateProducts() {
                             type="text"
                             name="also_receive"
                             placeholder="Content"
-                            value={x.stepHeading}
+                            value={x.also_content}
                             onChange={(e) => handleInputChange(e, i)}
                           />
                           

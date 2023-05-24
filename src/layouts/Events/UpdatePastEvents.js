@@ -52,7 +52,7 @@ function UpdatePastEvents() {
 
     const getsubCategoryData = async () => {
         const payload = {
-            main_category_id: 2,
+            main_category: 2,
         };
 
         const dataGet = await AuthApi.Postmethod(

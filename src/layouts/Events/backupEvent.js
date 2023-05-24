@@ -71,7 +71,7 @@ function backupEvent() {
   const getsubCategoryData = async (id) => {
 
    const payload={
-    main_category_id:id
+    main_category:id
     }
 
     const dataGet = await AuthApi.Postmethod("/get-events-sub-category",payload);

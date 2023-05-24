@@ -87,7 +87,7 @@ function UpdateUpcomigEvents() {
 
     const getsubCategoryData = async () => {
         const payload = {
-            main_category_id: 1,
+            main_category: 1,
         };
 
         const dataGet = await AuthApi.Postmethod(

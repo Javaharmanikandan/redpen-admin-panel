@@ -59,10 +59,11 @@ function CreateVideo() {
         const dataPost = await AuthApi.Postmethod("/create-video", payLoad);
         if (dataPost.data.status) {
             toast.success(dataPost.data.message);
+            reset();
         } else {
             toast.error(dataPost.data.message);
         }
-        reset();
+        
     };
 
     return (

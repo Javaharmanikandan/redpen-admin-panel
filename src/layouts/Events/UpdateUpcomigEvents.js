@@ -43,7 +43,7 @@ function UpdateUpcomigEvents() {
 
     // handle click event of the Add button
     const handleAddClick = () => {
-        setInputList([...inputList, { stepHeading: "", stepDescription: "" }]);
+        setInputList([...inputList, { steps_heading: "", steps_description: "" }]);
     };
 
     const {
@@ -57,6 +57,7 @@ function UpdateUpcomigEvents() {
 
     useEffect(() => {
         getDetails();
+        getsubCategoryData();
 
     }, []);
 
@@ -73,7 +74,7 @@ function UpdateUpcomigEvents() {
         setValue("event_sub_title", dataGet.data.data.event_sub_title);
         setValue("event_url", dataGet.data.data.event_url);
         setValue("event_category", dataGet.data.data.event_category);
-        const steps = dataGet.data && dataGet.data.data.event_steps;
+        const steps = dataGet.data.data.event_steps;
         const setps_array = await steps.map((data) => {
             return {
                 steps_heading: data.steps_heading,
@@ -81,7 +82,6 @@ function UpdateUpcomigEvents() {
             };
         });
         setInputList(setps_array);
-        getsubCategoryData();
         setLoad(false);
     };
 

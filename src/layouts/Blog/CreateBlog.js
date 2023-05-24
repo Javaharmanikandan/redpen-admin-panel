@@ -91,10 +91,11 @@ function CreateBlog() {
         );
         if (dataPost.data.status) {
             toast.success(dataPost.data.message);
+            reset();
         } else {
             toast.error(dataPost.data.message);
         }
-        reset();
+        
         setInputList([""])
     };
 

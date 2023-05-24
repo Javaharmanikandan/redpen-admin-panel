@@ -70,10 +70,11 @@ function CreateEventCategory() {
 
     if (dataPost.data.status) {
       toast.success(dataPost.data.message);
+      resetSub();
     } else {
       toast.error(dataPost.data.message);
     }
-    resetSub();
+    
   };
 
   

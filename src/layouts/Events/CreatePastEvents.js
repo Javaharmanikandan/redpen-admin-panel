@@ -57,16 +57,18 @@ function CreatePastEvents() {
     const payLoad = {
       event_category: data.event_category,
       event_date: data.event_date,
+      event_title: data.event_title,
       event_youtube_url: data.event_youtube_url,
     };
 
     const dataPost = await AuthApi.Postmethod("/create-past-events", payLoad);
     if (dataPost.data.status) {
       toast.success(dataPost.data.message);
+      reset();
     } else {
       toast.error(dataPost.data.message);
     }
-    reset();
+    
   };
 
   return (
@@ -154,7 +156,30 @@ function CreatePastEvents() {
                   </SoftBox>
                 </Grid>
 
-
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <SoftBox mb={2}>
+                    <SoftBox mb={1} ml={0.5}>
+                      <SoftTypography
+                        component="label"
+                        variant="caption"
+                        fontWeight="bold"
+                      >
+                        Event Title <span className="Errorspan">*</span>
+                      </SoftTypography>
+                    </SoftBox>
+                    <SoftInput
+                      {...register("event_title", { required: true })}
+                      type="text"
+                      name="event_title"
+                      placeholder="Event Title"
+                    />
+                    {errors.event_title && (
+                      <span className="Errorspan">
+                        * Please fill this field!
+                      </span>
+                    )}
+                  </SoftBox>
+                </Grid>
            
 
                 <Grid item xs={12} sm={12} md={6} lg={6}>

@@ -23,7 +23,7 @@ function CreateUpcomingEvents() {
   const [subCategoryData, setSubCategoryData] = useState([]);
 
   const [inputList, setInputList] = useState([
-    { stepHeading: "", stepDescription: "" },
+    { steps_heading: "", steps_description: "" },
   ]);
 
   // handle input change
@@ -43,7 +43,7 @@ function CreateUpcomingEvents() {
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { stepHeading: "", stepDescription: "" }]);
+    setInputList([...inputList, { steps_heading: "", steps_description: "" }]);
   };
 
   const {
@@ -95,11 +95,11 @@ function CreateUpcomingEvents() {
     );
     if (dataPost.data.status) {
       toast.success(dataPost.data.message);
+      reset();
     } else {
       toast.error(dataPost.data.message);
     }
-    reset();
-    setInputList([{ stepHeading: "", stepDescription: "" }])
+    setInputList([{ steps_heading: "", steps_description: "" }])
   };
 
   return (
@@ -443,16 +443,16 @@ function CreateUpcomingEvents() {
                         <div style={{ display: "flex", padding: 10 }}>
                           <SoftInput
                             type="text"
-                            name="stepHeading"
+                            name="steps_heading"
                             placeholder="Step Heading"
-                            value={x.stepHeading}
+                            value={x.steps_heading}
                             onChange={(e) => handleInputChange(e, i)}
                           />
                           <SoftInput
                             style={{ marginLeft: 10 }}
-                            name="stepDescription"
+                            name="steps_description"
                             placeholder="Enter Step Description "
-                            value={x.stepDescription}
+                            value={x.steps_description}
                             onChange={(e) => handleInputChange(e, i)}
                           />
                           <div style={{ display: "flex" }}>

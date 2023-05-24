@@ -425,14 +425,14 @@ function UpdateProducts() {
                                                         type="text"
                                                         name="question"
                                                         placeholder="Faq Question"
-                                                        value={x.stepHeading}
+                                                        value={x.question}
                                                         onChange={(e) => handleInputChangeFaq(e, i)}
                                                     />
                                                     <SoftInput
                                                         style={{ marginLeft: 10 }}
                                                         name="answer"
                                                         placeholder="Faq Answer "
-                                                        value={x.stepDescription}
+                                                        value={x.answer}
                                                         onChange={(e) => handleInputChangeFaq(e, i)}
                                                     />
                                                     <div style={{ display: "flex" }}>

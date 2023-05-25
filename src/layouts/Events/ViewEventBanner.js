@@ -37,7 +37,7 @@ function ViewEventBanner() {
     useEffect(() => {
         getDetails();
         Triger();
-    }, [data])
+    }, [])
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-events-banner');
         setData(response.data.data);
@@ -66,6 +66,7 @@ function ViewEventBanner() {
                 toast.error(dataPost.data.message);
             }
         }
+        getDetails();
     }
     return (
         <>

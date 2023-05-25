@@ -37,7 +37,7 @@ function ViewShopMainCategory() {
     useEffect(() => {
         getDetails();
         Triger();
-    }, [category])
+    }, [])
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-shop-category');
         setCategory(response.data.data);
@@ -68,6 +68,7 @@ function ViewShopMainCategory() {
                 toast.error(dataPost.data.message);
             }
         }
+         getDetails();
     }
     return (
                         <>
@@ -107,6 +108,8 @@ function ViewShopMainCategory() {
                                             <th className="text-center">Id</th>
                                             <th className="text-center">Category name</th>
                                             <th className="text-center">Category level</th>
+                                            <th className="text-center">Text color</th>
+                                            <th className="text-center">Background Color</th>
                                             <th className="text-center">Edit</th>
                                             <th className="text-center">Delete</th>
 
@@ -119,6 +122,8 @@ function ViewShopMainCategory() {
                                                 <td>{index + 1}</td>
                                                 <td>{result.category_name}</td>
                                                 <td>{result.category_level}</td>
+                                                <td style={{ backgroundColor: result.chip_text_color }}></td>
+                                                <td style={{ backgroundColor: result.chip_background_color }}></td>
                                                 <td>     <Link to={'/update-shop-category/' + result.id}>
                                                     <TbEdit size={20} color={"blue"} />
                                                 </Link></td>

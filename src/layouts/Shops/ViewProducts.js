@@ -37,7 +37,7 @@ function ViewProducts() {
     useEffect(() => {
         getDetails();
         Triger();
-    }, [data])
+    }, [])
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-products');
         setData(response.data.data);
@@ -68,6 +68,7 @@ function ViewProducts() {
                 toast.error(dataPost.data.message);
             }
         }
+        getDetails();
     }
     return (
                         <>

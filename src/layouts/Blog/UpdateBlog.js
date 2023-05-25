@@ -99,7 +99,7 @@ function UpdateBlog() {
     const onSubmit = async (data) => {
         setLoad(true);
         let formData = new FormData(); //formdata object
-        data.blog_image ?   formData.append("blog_image", data.blog_image[0]):"";
+        formData.append("blog_image", data.blog_image[0]);
         formData.append("category_id", data.category_id);
         formData.append("date", data.date);
         formData.append("blog_title", data.blog_title);
@@ -168,7 +168,7 @@ function UpdateBlog() {
 
                                             {...register("category_id", { required: true })}
                                         >
-                                            <option value="" selected>
+                                            <option value="" >
                                                 Select Category
                                             </option>
                                             {MainCategoryData &&

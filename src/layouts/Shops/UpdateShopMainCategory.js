@@ -45,6 +45,8 @@ function UpdateShopMainCategory() {
             "/get-shop-category/" + id,
         );
         setValue("category_level", dataGet.data.data.category_level);
+        setValue("chip_text_color", dataGet.data.data.chip_text_color);
+        setValue("chip_background_color", dataGet.data.data.chip_background_color);
         setValue("category_name", dataGet.data.data.category_name);
         setLoad(false);
     };
@@ -56,6 +58,8 @@ function UpdateShopMainCategory() {
         const payLoad = {
             category_level: data.category_level,
             category_name: data.category_name,
+            chip_text_color: data.chip_text_color,
+            chip_background_color: data.chip_background_color
         };
 
         const dataPost = await AuthApi.Postmethod(
@@ -131,7 +135,7 @@ function UpdateShopMainCategory() {
                                     </SoftBox>
                                 </Grid>
 
-                                <Grid item xs={12} sm={12} md={6} lg={6}>
+                                <Grid item xs={12} sm={12} md={2} lg={2}>
                                     <SoftBox mb={2}>
                                         <SoftBox mb={1} ml={0.5}>
                                             <SoftTypography
@@ -165,7 +169,95 @@ function UpdateShopMainCategory() {
                                                 * Please fill this field!
                                             </span>)}
                                     </SoftBox>
-                                </Grid>
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={2} lg={2}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Text Color *
+                                                    </SoftTypography>
+                                                </SoftBox>
+                                                <select
+                                                    className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
+                                                    name="chip_text_color"
+                                                    {...registerSub("chip_text_color", { required: true })}
+                                                >
+                                                    <option value="" selected disabled hidden>
+                                                        Select  color
+                                                    </option>
+                                                    <option value={'#FBBB3B'} style={{ color: '#FBBB3B' }}>
+                                                        Pastel Orange
+                                                    </option>
+                                                    <option value={'#FFFFFF'} style={{ color: '#FFFFFF' }}>
+                                                        White
+                                                    </option>
+                                                    <option value={'#1A1757'} style={{ color: '#1A1757' }}>
+                                                        Space Cadet
+                                                    </option>
+                                                </select>
+
+                                                {errors.chip_text_color && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>)}
+                                            </SoftBox>
+                                        </Grid>
+
+                                        <Grid item xs={12} sm={12} md={2} lg={2}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Background Color *
+                                                    </SoftTypography>
+                                                </SoftBox>
+                                                <select
+                                                    className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
+                                                    name="chip_background_color"
+                                                    {...registerSub("chip_background_color", { required: true })}
+                                                >
+                                                    <option value="" selected disabled hidden>
+                                                        Select  color
+                                                    </option>
+                                                    <option value={'#1A1757'} style={{ backgroundColor: '#1A1757' }} >
+                                                        Space Cadet
+                                                    </option>
+                                                    <option value={'#0EA7AF'} style={{ backgroundColor: '#0EA7AF' }}>
+                                                        Blue-Green
+                                                    </option>
+                                                    <option value={'#D82128'} style={{ backgroundColor: '#D82128' }}>
+                                                        Amaranth Red
+                                                    </option>
+                                                    <option value={'#8080A1'} style={{ backgroundColor: '#8080A1' }}>
+                                                        Light Slate Gray
+                                                    </option>
+                                                    <option value={'#404040'} style={{ backgroundColor: '#404040' }} >
+                                                        Black Olive
+                                                    </option>
+                                                    <option value={'#26797D'} style={{ backgroundColor: '#26797D' }}>
+                                                        Celadon Green
+                                                    </option>
+                                                    <option value={'#DAD2D8'} style={{ backgroundColor: '#DAD2D8' }}>
+                                                        Light Silver
+                                                    </option>
+                                                    <option value={'#FBBB3B'} style={{ backgroundColor: '#FBBB3B' }}>
+                                                        Pastel Orange
+                                                    </option>
+                                                </select>
+
+                                                {errors.chip_background_color && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>)}
+                                            </SoftBox>
+                                        </Grid>
 
                                 <Grid item xs={12} sm={12} md={12} lg={12}>
                                     <Box

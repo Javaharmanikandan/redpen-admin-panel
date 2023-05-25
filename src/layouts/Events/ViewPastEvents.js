@@ -37,7 +37,7 @@ function ViewPastEvents() {
     useEffect(() => {
         getDetails();
         Triger();
-    }, [data])
+    }, [])
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-past-events');
         setData(response.data.data);
@@ -66,6 +66,7 @@ function ViewPastEvents() {
                 toast.error(dataPost.data.message);
             }
         }
+        getDetails();
     }
     return (
          <>

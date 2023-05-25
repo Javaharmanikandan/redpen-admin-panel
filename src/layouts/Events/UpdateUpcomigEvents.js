@@ -57,12 +57,13 @@ function UpdateUpcomigEvents() {
 
     useEffect(() => {
         getDetails();
-        getsubCategoryData();
 
     }, []);
 
     const getDetails = async () => {
         setLoad(true);
+        getsubCategoryData();
+
         const dataGet = await AuthApi.GetMethod(
             "/get-upcoming-events/" + id,
         );
@@ -73,7 +74,7 @@ function UpdateUpcomigEvents() {
         setValue("event_about", dataGet.data.data.event_about);
         setValue("event_sub_title", dataGet.data.data.event_sub_title);
         setValue("event_url", dataGet.data.data.event_url);
-        setValue("event_category", dataGet.data.data.event_category);
+        setValue('event_category', dataGet.data.data.event_category, { shouldValidate: true })
         const steps = dataGet.data.data.event_steps;
         const setps_array = await steps.map((data) => {
             return {
@@ -179,7 +180,7 @@ function UpdateUpcomigEvents() {
                                                     name="event_category"
                                                     {...register("event_category", { required: true })}
                                                 >
-                                                    <option value="" selected>
+                                                    <option value="">
                                                         Select Event Category
                                                     </option>
                                                     {subCategoryData &&

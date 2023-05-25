@@ -37,7 +37,7 @@ function ViewVideo() {
     useEffect(() => {
         getDetails();
         Triger();
-    }, [data])
+    }, [])
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-video');
         setData(response.data.data);
@@ -68,6 +68,7 @@ function ViewVideo() {
                 toast.error(dataPost.data.message);
             }
         }
+        getDetails();
     }
     return (
                         <>

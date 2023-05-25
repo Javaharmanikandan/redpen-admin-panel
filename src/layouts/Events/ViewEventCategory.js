@@ -37,7 +37,7 @@ function ViewEventCategory() {
     useEffect(() => {
         getDetails();
         Triger();
-    }, [eventData])
+    }, [])
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-events-sub-category');
         setEventData(response.data.data);
@@ -68,6 +68,7 @@ function ViewEventCategory() {
                 toast.error(dataPost.data.message);
             }
           }
+          getDetails();
     }
     return (
                         <>

@@ -47,6 +47,9 @@ function UpdateVideo() {
         console.log(dataGet.data.data);
         setValue("youtube_url", dataGet.data.data.youtube_url);
         setValue("category_id", dataGet.data.data.category_id);
+        setValue("title", dataGet.data.data.title);
+        setValue("description", dataGet.data.data.description);
+        setValue("duration", dataGet.data.data.duration);
         setValue("post_by", dataGet.data.data.post_by);
         setValue("video_type", dataGet.data.data.video_type);
         setLoad(false);
@@ -69,6 +72,9 @@ function UpdateVideo() {
         const payLoad = {
             youtube_url: data.youtube_url,
             category_id: data.category_id,
+            title: data.title,
+            description: data.description,
+            duration: data.duration,
             post_by: data.post_by,
             video_type: data.video_type,
         };
@@ -88,181 +94,257 @@ function UpdateVideo() {
                 <div className="loader-container">
                     <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
                 </div> :
-        <DashboardLayout>
-            <DashboardNavbar />
+                <DashboardLayout>
+                    <DashboardNavbar />
 
-            <SoftBox py={3}>
-                <SoftBox mb={3}>
-                    <Card>
-                        <SoftBox
-                            display="flex"
-                            justifyContent="space-between"
-                            alignItems="center"
-                            p={3}
-                        >
-                            <SoftTypography variant="h6">
-                                Update Video
-                            </SoftTypography>
-                        </SoftBox>
-                        <form
-                            key={3}
-                            style={{ padding: "20px" }}
-                            onSubmit={handleSubmit(onSubmit)}
-                        >
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={12} md={4} lg={4}>
-                                    <SoftBox mb={2}>
-                                        <SoftBox mb={1} ml={0.5}>
-                                            <SoftTypography
-                                                component="label"
-                                                variant="caption"
-                                                fontWeight="bold"
-                                            >
-                                                Video Category <span className="Errorspan">*</span>
-                                            </SoftTypography>
-                                        </SoftBox>
-
-                                        <select
-                                            className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
-                                            name="category_id"
-                                            {...register("category_id", { required: true })}
-                                        >
-                                            <option value="" selected>
-                                                Select Category
-                                            </option>
-                                            {categoryData &&
-                                                categoryData.map((result, index) => {
-                                                    return (
-                                                        <option value={result.id}>
-                                                            {result.category_name}
-                                                        </option>
-                                                    );
-                                                })}
-                                        </select>
-                                        {errors.category_id && (
-                                            <span className="Errorspan">
-                                                * Please fill this field!
-                                            </span>
-                                        )}
-                                    </SoftBox>
-                                </Grid>
-
-                                <Grid item xs={12} sm={12} md={4} lg={4}>
-                                    <SoftBox mb={2}>
-                                        <SoftBox mb={1} ml={0.5}>
-                                            <SoftTypography
-                                                component="label"
-                                                variant="caption"
-                                                fontWeight="bold"
-                                            >
-                                                Post BY <span className="Errorspan">*</span>
-                                            </SoftTypography>
-                                        </SoftBox>
-                                        <SoftInput
-                                            {...register("post_by", { required: true })}
-                                            type="text"
-                                            name="post_by"
-                                            placeholder="Post BY "
-                                        />
-                                        {errors.post_by && (
-                                            <span className="Errorspan">
-                                                * Please fill this field!
-                                            </span>
-                                        )}
-                                    </SoftBox>
-                                </Grid>
-
-                                <Grid item xs={12} sm={12} md={4} lg={4}>
-                                    <SoftBox mb={2}>
-                                        <SoftBox mb={1} ml={0.5}>
-                                            <SoftTypography
-                                                component="label"
-                                                variant="caption"
-                                                fontWeight="bold"
-                                            >
-                                                Video Type <span className="Errorspan">*</span>
-                                            </SoftTypography>
-                                        </SoftBox>
-
-                                        <select
-                                            className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
-                                            name="video_type"
-                                            {...register("video_type", { required: true })}
-                                        >
-                                            <option value="" selected>
-                                                Select Category
-                                            </option>
-                                            <option value="recent">
-                                                Recent Video
-                                            </option>
-                                            <option value="feature">
-                                                Feature Video
-                                            </option>
-                                        </select>
-                                        {errors.video_type && (
-                                            <span className="Errorspan">
-                                                * Please fill this field!
-                                            </span>
-                                        )}
-                                    </SoftBox>
-                                </Grid>
-
-                            
-
-                                <Grid item xs={12} sm={12} md={6} lg={6}>
-                                    <SoftBox mb={2}>
-                                        <SoftBox mb={1} ml={0.5}>
-                                            <SoftTypography
-                                                component="label"
-                                                variant="caption"
-                                                fontWeight="bold"
-                                            >
-                                                Youtube URL <span className="Errorspan">*</span>
-                                            </SoftTypography>
-                                        </SoftBox>
-                                        <SoftInput
-                                            {...register("youtube_url", { required: true })}
-                                            type="text"
-                                            name="youtube_url"
-                                            placeholder="Youtube URL "
-                                        />
-                                        {errors.youtube_url && (
-                                            <span className="Errorspan">
-                                                * Please fill this field!
-                                            </span>
-                                        )}
-                                    </SoftBox>
-                                </Grid>
-
-                           
-
-                            
-                            </Grid>
-
-                            <Box
-                                display={"flex"}
-                                alignItems={"center"}
-                                justifyContent="center"
-                                pt={4.7}
-                            >
-                                <SoftBox>
-                                    <SoftButton
-                                        type="submit"
-                                        variant="gradient"
-                                        color="dark"
-                                        fullWidth
-                                    >
+                    <SoftBox py={3}>
+                        <SoftBox mb={3}>
+                            <Card>
+                                <SoftBox
+                                    display="flex"
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    p={3}
+                                >
+                                    <SoftTypography variant="h6">
                                         Update Video
-                                    </SoftButton>
+                                    </SoftTypography>
                                 </SoftBox>
-                            </Box>
-                        </form>
-                    </Card>
-                </SoftBox>
-            </SoftBox>
+                                <form
+                                    key={3}
+                                    style={{ padding: "20px" }}
+                                    onSubmit={handleSubmit(onSubmit)}
+                                >
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Video Category <span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
 
-            <Footer />
-        </DashboardLayout>
+                                                <select
+                                                    className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
+                                                    name="category_id"
+                                                    {...register("category_id", { required: true })}
+                                                >
+                                                    <option value="" >
+                                                        Select Category
+                                                    </option>
+                                                    {categoryData &&
+                                                        categoryData.map((result, index) => {
+                                                            return (
+                                                                <option value={result.id}>
+                                                                    {result.category_name}
+                                                                </option>
+                                                            );
+                                                        })}
+                                                </select>
+                                                {errors.category_id && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
+                                        </Grid>
+
+
+
+                                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Post BY <span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
+                                                <SoftInput
+                                                    {...register("post_by", { required: true })}
+                                                    type="text"
+                                                    name="post_by"
+                                                    placeholder="Post BY "
+                                                />
+                                                {errors.post_by && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
+                                        </Grid>
+
+                                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Video Type <span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
+
+                                                <select
+                                                    className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
+                                                    name="video_type"
+                                                    {...register("video_type", { required: true })}
+                                                >
+                                                    <option value="" selected>
+                                                        Select Type
+                                                    </option>
+                                                    <option value="recent">
+                                                        Recent Video
+                                                    </option>
+                                                    <option value="feature">
+                                                        Featured Video
+                                                    </option>
+                                                </select>
+                                                {errors.video_type && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
+                                        </Grid>
+
+                                        <Grid item xs={12} sm={12} md={6} lg={6}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Youtube Title <span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
+                                                <SoftInput
+                                                    {...register("title", { required: true })}
+                                                    type="text"
+                                                    name="title"
+                                                    placeholder="Youtube Title"
+                                                />
+                                                {errors.title && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={2} lg={2}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Duration <span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
+                                                <SoftInput
+                                                    {...register("duration", { required: true })}
+                                                    type="text"
+                                                    name="duration"
+                                                    placeholder="Video Duration"
+                                                />
+                                                {errors.duration && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Youtube URL <span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
+                                                <SoftInput
+                                                    {...register("youtube_url", { required: true })}
+                                                    type="text"
+                                                    name="youtube_url"
+                                                    placeholder="Youtube URL "
+                                                />
+                                                {errors.youtube_url && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={12} lg={12}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Description<span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
+
+                                                <textarea
+                                                    placeholder="Description.."
+                                                    style={{
+                                                        width: "100%",
+                                                        height: 120,
+                                                        border: "0.0625rem solid #d2d6da",
+                                                        padding: "12px 20px",
+                                                        fontSize: "16px",
+                                                        borderRadius: 10,
+                                                    }}
+                                                    name="description"
+                                                    {...register("description", { required: true })}
+                                                ></textarea>
+                                                {errors.description && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
+                                        </Grid>
+                                    </Grid>
+
+                                    <Box
+                                        display={"flex"}
+                                        alignItems={"center"}
+                                        justifyContent="center"
+                                        pt={4.7}
+                                    >
+                                        <SoftBox>
+                                            <SoftButton
+                                                type="submit"
+                                                variant="gradient"
+                                                color="dark"
+                                                fullWidth
+                                            >
+                                                Update Video
+                                            </SoftButton>
+                                        </SoftBox>
+                                    </Box>
+                                </form>
+                            </Card>
+                        </SoftBox>
+                    </SoftBox>
+
+                    <Footer />
+                </DashboardLayout>
             }</>);
 }
 

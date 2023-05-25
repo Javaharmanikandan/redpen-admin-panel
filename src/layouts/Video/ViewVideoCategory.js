@@ -37,7 +37,7 @@ function ViewVideoCategory() {
     useEffect(() => {
         getDetails();
         Triger();
-    }, [category])
+    }, [])
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-video-category');
         setCategory(response.data.data);
@@ -68,6 +68,7 @@ function ViewVideoCategory() {
                 toast.error(dataPost.data.message);
             }
         }
+        getDetails();
     }
     return (
                         <>

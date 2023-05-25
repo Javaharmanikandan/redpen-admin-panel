@@ -199,7 +199,7 @@ function UpdateProducts() {
 
                                             {...register("product_category", { onChange: (e) => { onChangeHandler(e) }, required: true })}
                                         >
-                                            <option value="" selected>
+                                            <option value="" >
                                                 Select Product  Category
                                             </option>
                                             {MainCategoryData &&

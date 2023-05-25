@@ -33,7 +33,7 @@ import { TbEdit, TbTrash } from "react-icons/tb";
 
 function ViewBlogCategory() {
     const [category, setCategory] = useState([]);
-    const [load, setLoad] = useState(false)
+    const [load, setLoad] = useState(true);
     useEffect(() => {
         getDetails();
         Triger();
@@ -41,6 +41,7 @@ function ViewBlogCategory() {
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-blog-category');
         setCategory(response.data.data);
+        setLoad(false);
     }
 
     const Triger = () => {
@@ -69,6 +70,11 @@ function ViewBlogCategory() {
         }
     }
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
             <SoftBox py={3}>
@@ -130,7 +136,7 @@ function ViewBlogCategory() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</> );
 }
 
 export default ViewBlogCategory;

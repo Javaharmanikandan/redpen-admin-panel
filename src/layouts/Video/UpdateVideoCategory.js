@@ -24,7 +24,7 @@ import { useParams } from "react-router-dom";
 
 function UpdateVideoCategory() {
     const { id } = useParams();
-
+    const [load, setLoad] = useState(false);
     const {
         register: registerSub,
         handleSubmit: handleSubmitSub,
@@ -38,15 +38,17 @@ function UpdateVideoCategory() {
     }, []);
 
     const getDetails = async () => {
+        setLoad(true);
         const dataGet = await AuthApi.GetMethod(
             "/get-video-category/" + id,
         );
         setValue("category_name", dataGet.data.data.category_name);
+        setLoad(false);
     };
     //After Submit  Category
 
     const onSubmitSub = async (data) => {
-
+        setLoad(true);
         const payLoad = {
             category_name: data.category_name,
         };
@@ -61,6 +63,7 @@ function UpdateVideoCategory() {
         } else {
             toast.error(dataPost.data.message);
         }
+        setLoad(false);
     };
 
 
@@ -70,6 +73,11 @@ function UpdateVideoCategory() {
 
 
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -148,7 +156,7 @@ function UpdateVideoCategory() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</>);
 }
 
 export default UpdateVideoCategory;

@@ -37,6 +37,7 @@ function CreatePastEvents() {
   }, []);
 
   const getsubCategoryData = async () => {
+    setLoad(true);
     const payload = {
       main_category: 2,
     };
@@ -47,6 +48,7 @@ function CreatePastEvents() {
     );
 
     setSubCategoryData(dataGet.data.data);
+    setLoad(false);
   };
 
   //To Insert All Data
@@ -68,10 +70,15 @@ function CreatePastEvents() {
     } else {
       toast.error(dataPost.data.message);
     }
-    
+    setLoad(false);
   };
 
   return (
+                    <>
+      {load ?
+        <div className="loader-container">
+          <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+        </div> :
     <DashboardLayout>
       <DashboardNavbar />
 
@@ -232,7 +239,7 @@ function CreatePastEvents() {
 
       <Footer />
     </DashboardLayout>
-  );
+      }</> );
 }
 
 export default CreatePastEvents;

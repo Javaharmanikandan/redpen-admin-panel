@@ -23,7 +23,7 @@ import AuthApi from "api/auth";
 
 function CreateShopMainCategory() {
   
-
+  const [load, setLoad] = useState(false);
   
   const {
     register: registerSub,
@@ -37,7 +37,7 @@ function CreateShopMainCategory() {
   //After Submit Sub Category
 
   const onSubmitSub = async (data) => {
-
+    setLoad(true);
     const payLoad = {
       category_level: data.category_level,
       category_name: data.category_name,
@@ -54,7 +54,7 @@ function CreateShopMainCategory() {
     } else {
       toast.error(dataPost.data.message);
     }
-    
+    setLoad(false);
   };
 
   
@@ -64,6 +64,11 @@ function CreateShopMainCategory() {
 
 
   return (
+                    <>
+      {load ?
+        <div className="loader-container">
+          <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+        </div> :
     <DashboardLayout>
       <DashboardNavbar />
    
@@ -177,7 +182,7 @@ function CreateShopMainCategory() {
 
       <Footer />
     </DashboardLayout>
-  );
+      }</>);
 }
 
 export default CreateShopMainCategory;

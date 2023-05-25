@@ -27,7 +27,7 @@ function UpdateEventCategory() {
     const { id } = useParams();
 
     const [mainCategoryData, setMainCategoryData] = useState([]);
-
+    const [load, setLoad] = useState(false);
     const {
         register: registerSub,
         handleSubmit: handleSubmitSub,
@@ -43,21 +43,23 @@ function UpdateEventCategory() {
     }, []);
 
     const getDetails = async () => {
+        setLoad(false);
         const dataGet = await AuthApi.GetMethod(
             "/get-events-sub-category/" + id,
         );
         setValue("MainCategory", dataGet.data.data.main_category);
         setValue("SubCategory", dataGet.data.data.sub_category_name);
+        setLoad(true);
     };
 
     //To Fetch Data Main Category 
 
     const getMainCategoryData = async () => {
-
+        setLoad(true);
         const dataGet = await AuthApi.GetMethod("/get-events-main-category");
 
         setMainCategoryData(dataGet.data.data);
-
+        setLoad(false);
     }
 
 
@@ -68,7 +70,7 @@ function UpdateEventCategory() {
     //After Submit Sub Category
 
     const onSubmitSub = async (data) => {
-
+        setLoad(true);
         const payLoad = {
             main_category: data.MainCategory,
             sub_category_name: data.SubCategory,
@@ -84,6 +86,7 @@ function UpdateEventCategory() {
         } else {
             toast.error(dataPost.data.message);
         }
+        setLoad(false);
     };
 
 
@@ -93,6 +96,11 @@ function UpdateEventCategory() {
 
 
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -203,7 +211,7 @@ function UpdateEventCategory() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</> );
 }
 
 export default UpdateEventCategory;

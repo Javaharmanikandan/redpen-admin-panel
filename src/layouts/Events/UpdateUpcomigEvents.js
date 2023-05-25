@@ -22,7 +22,7 @@ import { useParams } from "react-router-dom";
 function UpdateUpcomigEvents() {
     const { id } = useParams();
     const [subCategoryData, setSubCategoryData] = useState([]);
-    const [load, setLoad] = useState(true);
+    const [load, setLoad] = useState(false);
 
     const [inputList, setInputList] = useState([]);
 
@@ -86,6 +86,7 @@ function UpdateUpcomigEvents() {
     };
 
     const getsubCategoryData = async () => {
+        setLoad(true);
         const payload = {
             main_category: 1,
         };
@@ -96,6 +97,7 @@ function UpdateUpcomigEvents() {
         );
 
         setSubCategoryData(dataGet.data.data);
+        setLoad(false);
     };
 
 
@@ -104,6 +106,7 @@ function UpdateUpcomigEvents() {
     //To Insert All Data
 
     const onSubmit = async (data) => {
+        setLoad(true);
         let formData = new FormData(); //formdata object
 
         data.event_image ? formData.append("image", data.event_image[0]) : "";
@@ -128,6 +131,7 @@ function UpdateUpcomigEvents() {
         } else {
             toast.error(dataPost.data.message);
         }
+        setLoad(false);
     };
 
     return (

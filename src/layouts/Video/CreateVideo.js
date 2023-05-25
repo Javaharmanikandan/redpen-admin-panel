@@ -22,7 +22,7 @@ import AuthApi from "api/auth";
 function CreateVideo() {
 
     const [categoryData, setcategoryData] = useState([]);
-
+    const [load, setLoad] = useState(false);
     const {
         register,
         handleSubmit,
@@ -36,18 +36,19 @@ function CreateVideo() {
     }, []);
 
     const getcategoryData = async () => {
-     
+        setLoad(true);
         const dataGet = await AuthApi.GetMethod(
             "/get-video-category",
         );
 
         setcategoryData(dataGet.data.data);
+        setLoad(false);
     };
 
     //To Insert All Data
 
     const onSubmit = async (data) => {
-
+        setLoad(true);
         const payLoad = {
             youtube_url: data.youtube_url,
             category_id: data.category_id,
@@ -63,10 +64,15 @@ function CreateVideo() {
         } else {
             toast.error(dataPost.data.message);
         }
-        
+        setLoad(false); 
     };
 
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -239,7 +245,7 @@ function CreateVideo() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</> );
 }
 
 export default CreateVideo;

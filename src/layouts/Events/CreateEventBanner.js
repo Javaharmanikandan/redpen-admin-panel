@@ -22,7 +22,7 @@ import AuthApi from "api/auth";
 
 
 function CreateEventBanner() {
-
+    const [load, setLoad] = useState(false);
 
 
     const {
@@ -37,7 +37,7 @@ function CreateEventBanner() {
     //After Submit Sub Category
 
     const onSubmitSub = async (data) => {
-
+        setLoad(true);
         let formData = new FormData(); //formdata object
         formData.append("mobile_banner", data.mobile_banner[0]);
         formData.append("desktop_banner", data.desktop_banner[0]);
@@ -53,6 +53,7 @@ function CreateEventBanner() {
         } else {
             toast.error(dataPost.data.message);
         }
+        setLoad(false);
     };
 
 
@@ -62,6 +63,11 @@ function CreateEventBanner() {
 
 
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -188,7 +194,7 @@ function CreateEventBanner() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</> );
 }
 
 export default CreateEventBanner;

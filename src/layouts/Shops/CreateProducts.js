@@ -18,10 +18,11 @@ import SoftInput from "components/SoftInput";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import AuthApi from "api/auth";
+import { TbGitPullRequestClosed } from "react-icons/tb";
 
 function CreateProducts() {
   const [MainCategoryData, setMainCategoryData] = useState([]);
-
+  const [load, setLoad] = useState(false);
   const [inputList, setInputList] = useState([
     { also_receive: "" },
   ]);
@@ -95,19 +96,19 @@ function CreateProducts() {
     // const payload = {
     //   main_category_id: 1,
     // };
-
+    setLoad(true);
     const dataGet = await AuthApi.GetMethod(
       "/get-shop-category"
     );
 
-    console.log(dataGet)
-
     setMainCategoryData(dataGet.data.data);
+    setLoad(false);
   };
 
   //To Insert All Data
 
   const onSubmit = async (data) => {
+    setLoad(true);
     let formData = new FormData(); //formdata object
     formData.append("product_image", data.product_image[0]);
     formData.append("product_category", data.product_category);
@@ -130,7 +131,8 @@ function CreateProducts() {
       toast.error(dataPost.data.message);
     }
    
-    setInputList([{ also_receive: "" }])
+    setInputList([{ also_receive: "" }]);
+    setLoad(false);
   };
 
 
@@ -139,6 +141,11 @@ function CreateProducts() {
   
 
   return (
+                    <>
+      {load ?
+        <div className="loader-container">
+          <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+        </div> :
     <DashboardLayout>
       <DashboardNavbar />
 
@@ -497,7 +504,7 @@ function CreateProducts() {
 
       <Footer />
     </DashboardLayout>
-  );
+      }</>);
 }
 
 export default CreateProducts;

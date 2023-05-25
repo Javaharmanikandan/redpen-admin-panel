@@ -24,6 +24,7 @@ import { useParams } from "react-router-dom";
 function UpdatePastEvents() {
     const { id } = useParams();
     const [subCategoryData, setSubCategoryData] = useState([]);
+    const [load, setLoad] = useState(false);
 
     const {
         register,
@@ -40,6 +41,7 @@ function UpdatePastEvents() {
     }, []);
 
     const getDetails = async () => {
+        setLoad(true);
         const dataGet = await AuthApi.GetMethod(
             "/get-past-events/" + id,
         );
@@ -47,10 +49,11 @@ function UpdatePastEvents() {
         setValue("event_date", dataGet.data.data.event_date);
         setValue("event_title", dataGet.data.data.event_title);
         setValue("event_youtube_url", dataGet.data.data.event_youtube_url);
-     
+        setLoad(false);
     };
 
     const getsubCategoryData = async () => {
+        setLoad(true);
         const payload = {
             main_category: 2,
         };
@@ -61,12 +64,13 @@ function UpdatePastEvents() {
         );
 
         setSubCategoryData(dataGet.data.data);
+        setLoad(false);
     };
 
     //To Insert All Data
 
     const onSubmit = async (data) => {
-
+        setLoad(true);
         const payLoad = {
             event_category: data.event_category,
             event_date: data.event_date,
@@ -80,9 +84,15 @@ function UpdatePastEvents() {
         } else {
             toast.error(dataPost.data.message);
         }
+        setLoad(false);
     };
 
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -243,7 +253,7 @@ function UpdatePastEvents() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</>  );
 }
 
 export default UpdatePastEvents;

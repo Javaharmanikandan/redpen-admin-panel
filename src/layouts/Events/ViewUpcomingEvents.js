@@ -33,7 +33,7 @@ import { TbEdit, TbTrash } from "react-icons/tb";
 
 function ViewUpcomingEvents() {
     const [data, setData] = useState([]);
-    const [load, setLoad] = useState(false)
+    const [load, setLoad] = useState(true);
     useEffect(() => {
         getDetails();
         Triger();
@@ -41,6 +41,7 @@ function ViewUpcomingEvents() {
     const getDetails = async () => {
         const response = await AuthApi.GetMethod('/get-upcoming-events');
         setData(response.data.data);
+        setLoad(false);
     }
 
     const Triger = () => {
@@ -67,6 +68,11 @@ function ViewUpcomingEvents() {
         }
     }
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
             <SoftBox py={3}>
@@ -146,7 +152,7 @@ function ViewUpcomingEvents() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</> );
 }
 
 export default ViewUpcomingEvents;

@@ -25,7 +25,7 @@ import { useParams } from "react-router-dom";
 function UpdateEventBanner() {
 
     const { id } = useParams();
-
+    const [load, setLoad] = useState(false);
 
     const {
         register: registerSub,
@@ -40,16 +40,18 @@ function UpdateEventBanner() {
     }, []);
 
     const getDetails = async () => {
+        setLoad(true);
         const dataGet = await AuthApi.GetMethod(
             "/get-events-banner/" + id,
         );
         setValue("banner_url", dataGet.data.data.banner_url);
+        setLoad(false);
     };
 
     //After Submit Category
 
     const onSubmitSub = async (data) => {
-
+        setLoad(true);
         let formData = new FormData(); //formdata object
         formData.append("mobile_banner", data.mobile_banner[0]);
         formData.append("desktop_banner", data.desktop_banner[0]);
@@ -64,6 +66,7 @@ function UpdateEventBanner() {
         } else {
             toast.error(dataPost.data.message);
         }
+        setLoad(false);
     };
 
 
@@ -73,6 +76,11 @@ function UpdateEventBanner() {
 
 
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -193,7 +201,7 @@ function UpdateEventBanner() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</>  );
 }
 
 export default UpdateEventBanner;

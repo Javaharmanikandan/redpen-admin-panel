@@ -24,7 +24,7 @@ function UpdateBlog() {
     const { id } = useParams();
     
     const [MainCategoryData, setMainCategoryData] = useState([]);
-
+    const [load, setLoad] = useState(false);
     const [inputList, setInputList] = useState([""]);
 
 
@@ -68,6 +68,7 @@ function UpdateBlog() {
     }, []);
 
     const getDetails = async () => {
+        setLoad(true);
         const dataGet = await AuthApi.GetMethod(
             "/get-blog/" + id,
         );
@@ -83,6 +84,7 @@ function UpdateBlog() {
         for (let index = 0; index < tags.length; index++) {
      
         }
+        setLoad(false);
     };
 
     const getmainCategoryData = async () => {
@@ -95,6 +97,7 @@ function UpdateBlog() {
     //To Insert All Data
 
     const onSubmit = async (data) => {
+        setLoad(true);
         let formData = new FormData(); //formdata object
         data.blog_image ?   formData.append("blog_image", data.blog_image[0]):"";
         formData.append("category_id", data.category_id);
@@ -113,12 +116,18 @@ function UpdateBlog() {
         } else {
             toast.error(dataPost.data.message);
         }
+        setLoad(false);
     };
 
 
 
 
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -450,7 +459,7 @@ function UpdateBlog() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</> );
 }
 
 export default UpdateBlog;

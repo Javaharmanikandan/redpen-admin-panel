@@ -23,7 +23,7 @@ import AuthApi from "api/auth";
 
 function CreateBlogCategory() {
 
-
+    const [load, setLoad] = useState(false);
 
     const {
         register: registerSub,
@@ -37,7 +37,7 @@ function CreateBlogCategory() {
     //After Submit Sub Category
 
     const onSubmitSub = async (data) => {
-
+        setLoad(true);
         const payLoad = {
             category_name: data.category_name,
         };
@@ -53,7 +53,7 @@ function CreateBlogCategory() {
         } else {
             toast.error(dataPost.data.message);
         }
-        
+        setLoad(false);
     };
 
 
@@ -63,6 +63,11 @@ function CreateBlogCategory() {
 
 
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -141,7 +146,7 @@ function CreateBlogCategory() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</> );
 }
 
 export default CreateBlogCategory;

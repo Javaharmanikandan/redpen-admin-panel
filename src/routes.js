@@ -79,6 +79,9 @@ import ViewUpcomingEvents from "layouts/Events/ViewUpcomingEvents";
 import ViewEventBanner from "layouts/Events/ViewEventBanner";
 import CreateEventBanner from "layouts/Events/CreateEventBanner";
 import UpdateEventBanner from "layouts/Events/UpdateEventBanner";
+import ViewSem from "layouts/Sem/ViewSem";
+import CreateSem from "layouts/Sem/CreateSem";
+import UpdateSem from "layouts/Sem/UpdateSem";
 
 
 const routes = [
@@ -388,6 +391,36 @@ const routes = [
     route: "/update-blog/:id",
     icon: <Shop size="18px" />,
     component: <UpdateBlog/>,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "collapse",
+    name: "Sem",
+    key: "sem",
+    route: "/sem",
+    icon: <Shop size="18px" />,
+    component: <ViewSem />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Create Sem",
+    key: "create-sem",
+    route: "/create-sem",
+    icon: <Shop size="18px" />,
+    component: <CreateSem />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Update Sem",
+    key: "update-sem",
+    route: "/update-sem/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdateSem />,
     noCollapse: true,
     protected: true,
   },

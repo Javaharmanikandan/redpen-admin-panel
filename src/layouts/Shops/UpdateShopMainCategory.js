@@ -25,7 +25,7 @@ import { useParams } from "react-router-dom";
 
 function UpdateShopMainCategory() {
     const { id } = useParams();
-
+    const [load, setLoad] = useState(false);
     const {
         register: registerSub,
         handleSubmit: handleSubmitSub,
@@ -40,17 +40,19 @@ function UpdateShopMainCategory() {
 
 
     const getDetails = async () => {
+        setLoad(true);
         const dataGet = await AuthApi.GetMethod(
             "/get-shop-category/" + id,
         );
         setValue("category_level", dataGet.data.data.category_level);
         setValue("category_name", dataGet.data.data.category_name);
+        setLoad(false);
     };
 
     //After Submit Category
 
     const onSubmitSub = async (data) => {
-
+        setLoad(true);
         const payLoad = {
             category_level: data.category_level,
             category_name: data.category_name,
@@ -66,6 +68,7 @@ function UpdateShopMainCategory() {
         } else {
             toast.error(dataPost.data.message);
         }
+        setLoad(false);
     };
 
 
@@ -75,6 +78,11 @@ function UpdateShopMainCategory() {
 
 
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -188,7 +196,7 @@ function UpdateShopMainCategory() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</>);
 }
 
 export default UpdateShopMainCategory;

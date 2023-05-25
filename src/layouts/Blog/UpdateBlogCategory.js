@@ -23,7 +23,7 @@ import { useParams } from "react-router-dom";
 
 
 function UpdateBlogCategory() {
-
+    const [load, setLoad] = useState(false);
     const { id } = useParams();
 
 
@@ -40,16 +40,18 @@ function UpdateBlogCategory() {
     }, []);
 
     const getDetails = async () => {
+        setLoad(true);
         const dataGet = await AuthApi.GetMethod(
             "/get-blog-category/" + id,
         );
         setValue("category_name", dataGet.data.data.category_name);
+        setLoad(false);
     };
 
     //After Submit Category
 
     const onSubmitSub = async (data) => {
-
+        setLoad(true);
         const payLoad = {
             category_name: data.category_name,
         };
@@ -64,6 +66,7 @@ function UpdateBlogCategory() {
         } else {
             toast.error(dataPost.data.message);
         }
+        setLoad(false);
     };
 
 
@@ -73,6 +76,11 @@ function UpdateBlogCategory() {
 
 
     return (
+             <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -151,7 +159,7 @@ function UpdateBlogCategory() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</> );
 }
 
 export default UpdateBlogCategory;

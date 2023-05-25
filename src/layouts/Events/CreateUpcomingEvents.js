@@ -21,7 +21,7 @@ import AuthApi from "api/auth";
 
 function CreateUpcomingEvents() {
   const [subCategoryData, setSubCategoryData] = useState([]);
-
+  const [load, setLoad] = useState(false);
   const [inputList, setInputList] = useState([
     { steps_heading: "", steps_description: "" },
   ]);
@@ -59,6 +59,7 @@ function CreateUpcomingEvents() {
   }, []);
 
   const getsubCategoryData = async () => {
+    setLoad(true);
     const payload = {
       main_category: 1,
     };
@@ -69,11 +70,13 @@ function CreateUpcomingEvents() {
     );
 
     setSubCategoryData(dataGet.data.data);
+    setLoad(false);
   };
 
   //To Insert All Data
 
   const onSubmit = async (data) => {
+    setLoad(true);
     let formData = new FormData(); //formdata object
 
     formData.append("image", data.event_image[0]);
@@ -99,10 +102,16 @@ function CreateUpcomingEvents() {
     } else {
       toast.error(dataPost.data.message);
     }
-    setInputList([{ steps_heading: "", steps_description: "" }])
+    setInputList([{ steps_heading: "", steps_description: "" }]);
+    setLoad(false);
   };
 
   return (
+                    <>
+      {load ?
+        <div className="loader-container">
+          <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+        </div> :
     <DashboardLayout>
       <DashboardNavbar />
 
@@ -520,7 +529,7 @@ function CreateUpcomingEvents() {
 
       <Footer />
     </DashboardLayout>
-  );
+      }</>);
 }
 
 export default CreateUpcomingEvents;

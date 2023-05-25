@@ -24,7 +24,7 @@ import { useParams } from "react-router-dom";
 function UpdateVideo() {
     const { id } = useParams();
     const [categoryData, setcategoryData] = useState([]);
-
+    const [load, setLoad] = useState(false);
     const {
         register,
         handleSubmit,
@@ -40,6 +40,7 @@ function UpdateVideo() {
     }, []);
 
     const getDetails = async () => {
+        setLoad(true);
         const dataGet = await AuthApi.GetMethod(
             "/get-video/" + id,
         );
@@ -48,21 +49,23 @@ function UpdateVideo() {
         setValue("category_id", dataGet.data.data.category_id);
         setValue("post_by", dataGet.data.data.post_by);
         setValue("video_type", dataGet.data.data.video_type);
+        setLoad(false);
   };
 
     const getcategoryData = async () => {
-
+        setLoad(true);
         const dataGet = await AuthApi.GetMethod(
             "/get-video-category",
         );
 
         setcategoryData(dataGet.data.data);
+        setLoad(false);
     };
 
     //To Insert All Data
 
     const onSubmit = async (data) => {
-
+        setLoad(true);
         const payLoad = {
             youtube_url: data.youtube_url,
             category_id: data.category_id,
@@ -76,9 +79,15 @@ function UpdateVideo() {
         } else {
             toast.error(dataPost.data.message);
         }
+        setLoad(false);
     };
 
     return (
+                        <>
+            {load ?
+                <div className="loader-container">
+                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
+                </div> :
         <DashboardLayout>
             <DashboardNavbar />
 
@@ -254,7 +263,7 @@ function UpdateVideo() {
 
             <Footer />
         </DashboardLayout>
-    );
+            }</>);
 }
 
 export default UpdateVideo;

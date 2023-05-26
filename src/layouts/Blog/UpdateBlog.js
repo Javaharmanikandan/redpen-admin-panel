@@ -34,7 +34,6 @@ function UpdateBlog() {
         list[index] = value;
         setInputList(list);
 
-        console.log(inputList, "e");
     };
 
     // handle click event of the Remove button

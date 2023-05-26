@@ -410,7 +410,7 @@ function CreateBlog() {
                                                                 type="text"
                                                                 name="blog_tags"
                                                                 placeholder="Content"
-                                                                value={x.stepHeading}
+                                                                value={x}
                                                                 onChange={(e) => handleInputChange(e, i)}
                                                             />
 

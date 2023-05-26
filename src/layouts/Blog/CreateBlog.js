@@ -15,15 +15,19 @@ import "react-toastify/dist/ReactToastify.css";
 // Data
 import Grid from "@mui/material/Grid";
 import SoftInput from "components/SoftInput";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import AuthApi from "api/auth";
+import JoditEditor from "jodit-react";
 
 function CreateBlog() {
+    const [content, setContent] = useState("");
+
+    console.log(content);
+
     const [MainCategoryData, setMainCategoryData] = useState([]);
     const [load, setLoad] = useState(false);
     const [inputList, setInputList] = useState([""]);
-
 
     // handle input change
     const handleInputChange = (e, index) => {
@@ -31,7 +35,6 @@ function CreateBlog() {
         const list = [...inputList];
         list[index] = value;
         setInputList(list);
-
 
         console.log(inputList, "e");
     };
@@ -48,8 +51,6 @@ function CreateBlog() {
         setInputList([...inputList, ""]);
     };
 
-
-
     const {
         register,
         handleSubmit,
@@ -64,11 +65,9 @@ function CreateBlog() {
 
     const getmainCategoryData = async () => {
         setLoad(true);
-        const dataGet = await AuthApi.GetMethod(
-            "/get-blog-category"
-        );
+        const dataGet = await AuthApi.GetMethod("/get-blog-category");
 
-        console.log(dataGet)
+        console.log(dataGet);
 
         setMainCategoryData(dataGet.data.data);
         setLoad(false);
@@ -85,13 +84,10 @@ function CreateBlog() {
         formData.append("blog_title", data.blog_title);
         formData.append("post_by", data.post_by);
         formData.append("post_type", data.post_type);
-        formData.append("blog_describtion", data.blog_describtion);
+        formData.append("blog_describtion", content);
         formData.append("blog_url", data.blog_url);
         formData.append("blog_tags", JSON.stringify(inputList));
-        const dataPost = await AuthApi.PostmethodWithFile(
-            "/create-blog",
-            formData
-        );
+        const dataPost = await AuthApi.PostmethodWithFile("/create-blog", formData);
         if (dataPost.data.status) {
             toast.success(dataPost.data.message);
             reset();
@@ -99,18 +95,21 @@ function CreateBlog() {
             toast.error(dataPost.data.message);
         }
         setLoad(false);
-        setInputList([""])
+        setInputList([""]);
+        setContent("");
+
     };
-
-
-
 
     return (
         <>
-            {load ?
+            {load ? (
                 <div className="loader-container">
-                    <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
-                </div> :
+                    <img
+                        style={{ width: 100, height: 100 }}
+                        src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"
+                    ></img>
+                </div>
+            ) : (
                 <DashboardLayout>
                     <DashboardNavbar />
 
@@ -123,9 +122,7 @@ function CreateBlog() {
                                     alignItems="center"
                                     p={3}
                                 >
-                                    <SoftTypography variant="h6">
-                                        Create New Blog
-                                    </SoftTypography>
+                                    <SoftTypography variant="h6">Create New Blog</SoftTypography>
                                 </SoftBox>
                                 <form
                                     key={3}
@@ -141,14 +138,13 @@ function CreateBlog() {
                                                         variant="caption"
                                                         fontWeight="bold"
                                                     >
-                                                        Blog  Category <span className="Errorspan">*</span>
+                                                        Blog Category <span className="Errorspan">*</span>
                                                     </SoftTypography>
                                                 </SoftBox>
 
                                                 <select
                                                     className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
                                                     name="category_id"
-
                                                     {...register("category_id", { required: true })}
                                                 >
                                                     <option value="" selected>
@@ -195,11 +191,6 @@ function CreateBlog() {
                                                 )}
                                             </SoftBox>
                                         </Grid>
-
-
-
-
-
 
                                         <Grid item xs={12} sm={12} md={3} lg={3}>
                                             <SoftBox mb={2}>
@@ -300,7 +291,6 @@ function CreateBlog() {
                                             </SoftBox>
                                         </Grid>
 
-
                                         <Grid item xs={12} sm={12} md={4} lg={4}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
@@ -334,28 +324,18 @@ function CreateBlog() {
                                                         variant="caption"
                                                         fontWeight="bold"
                                                     >
-                                                        Blog Description <span className="Errorspan">*</span>
+                                                        Blog Description{" "}
+                                                        <span className="Errorspan">*</span>
                                                     </SoftTypography>
                                                 </SoftBox>
 
-                                                <textarea
-                                                    placeholder="About the Product.."
-                                                    style={{
-                                                        width: "100%",
-                                                        height: 120,
-                                                        border: "0.0625rem solid #d2d6da",
-                                                        padding: "12px 20px",
-                                                        fontSize: "16px",
-                                                        borderRadius: 10,
+                                                <JoditEditor
+                                                    value={content}
+                                                    tabIndex={1} // tabIndex of textarea
+                                                    onChange={(newContent) => {
+                                                        setContent(newContent);
                                                     }}
-                                                    name="blog_describtion"
-                                                    {...register("blog_describtion", { required: true })}
-                                                ></textarea>
-                                                {errors.blog_describtion && (
-                                                    <span className="Errorspan">
-                                                        * Please fill this field!
-                                                    </span>
-                                                )}
+                                                />
                                             </SoftBox>
                                         </Grid>
 
@@ -367,8 +347,7 @@ function CreateBlog() {
                                                         variant="caption"
                                                         fontWeight="bold"
                                                     >
-                                                        Blog tags{" "}
-                                                        <span className="Errorspan">*</span>
+                                                        Blog tags <span className="Errorspan">*</span>
                                                     </SoftTypography>
                                                 </SoftBox>
 
@@ -422,8 +401,6 @@ function CreateBlog() {
                                                 })}
                                             </SoftBox>
                                         </Grid>
-
-
                                     </Grid>
 
                                     <Box
@@ -450,7 +427,9 @@ function CreateBlog() {
 
                     <Footer />
                 </DashboardLayout>
-            }</>  );
+            )}
+        </>
+    );
 }
 
 export default CreateBlog;

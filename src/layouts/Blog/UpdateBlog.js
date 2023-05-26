@@ -414,7 +414,7 @@ function UpdateBlog() {
                                                                     type="text"
                                                                     name="blog_tags"
                                                                     placeholder="Content"
-                                                                    value={x.stepHeading}
+                                                                    value={x}
                                                                     onChange={(e) => handleInputChange(e, i)}
                                                                 />
 
@@ -472,7 +472,7 @@ function UpdateBlog() {
                                                     color="dark"
                                                     fullWidth
                                                 >
-                                                    Add Blog
+                                                    Update Blog
                                                 </SoftButton>
                                             </SoftBox>
                                         </Box>

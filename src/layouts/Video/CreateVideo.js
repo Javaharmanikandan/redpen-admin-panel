@@ -53,7 +53,6 @@ function CreateVideo() {
             youtube_url: data.youtube_url,
             category_id: data.category_id,
             title: data.title,
-            description: data.description,
             duration: data.duration,
             post_by: data.post_by,
             video_type: data.video_type,
@@ -145,7 +144,7 @@ function CreateVideo() {
                                                         variant="caption"
                                                         fontWeight="bold"
                                                     >
-                                                        Post BY <span className="Errorspan">*</span>
+                                                        Post Type <span className="Errorspan">*</span>
                                                     </SoftTypography>
                                                 </SoftBox>
                                                 <SoftInput
@@ -269,38 +268,7 @@ function CreateVideo() {
                                                 )}
                                             </SoftBox>
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={12} lg={12}>
-                                            <SoftBox mb={2}>
-                                                <SoftBox mb={1} ml={0.5}>
-                                                    <SoftTypography
-                                                        component="label"
-                                                        variant="caption"
-                                                        fontWeight="bold"
-                                                    >
-                                                        Description<span className="Errorspan">*</span>
-                                                    </SoftTypography>
-                                                </SoftBox>
-
-                                                <textarea
-                                                    placeholder="Description.."
-                                                    style={{
-                                                        width: "100%",
-                                                        height: 120,
-                                                        border: "0.0625rem solid #d2d6da",
-                                                        padding: "12px 20px",
-                                                        fontSize: "16px",
-                                                        borderRadius: 10,
-                                                    }}
-                                                    name="description"
-                                                    {...register("description", { required: true })}
-                                                ></textarea>
-                                                {errors.description && (
-                                                    <span className="Errorspan">
-                                                        * Please fill this field!
-                                                    </span>
-                                                )}
-                                            </SoftBox>
-                                        </Grid>
+                                        
                                     </Grid>
 
                                     <Box

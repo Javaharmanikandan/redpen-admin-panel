@@ -145,7 +145,7 @@ function UpdateBlog() {
                                     onSubmit={handleSubmit(onSubmit)}
                                 >
                                     <Grid container spacing={2}>
-                                        <Grid item xs={12} sm={12} md={3} lg={3}>
+                                        <Grid item xs={12} sm={12} md={4} lg={4}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography
@@ -182,7 +182,7 @@ function UpdateBlog() {
                                             </SoftBox>
                                         </Grid>
 
-                                        <Grid item xs={12} sm={12} md={3} lg={3}>
+                                        <Grid item xs={12} sm={12} md={4} lg={4}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography
@@ -207,32 +207,8 @@ function UpdateBlog() {
                                             </SoftBox>
                                         </Grid>
 
-                                        <Grid item xs={12} sm={12} md={3} lg={3}>
-                                            <SoftBox mb={2}>
-                                                <SoftBox mb={1} ml={0.5}>
-                                                    <SoftTypography
-                                                        component="label"
-                                                        variant="caption"
-                                                        fontWeight="bold"
-                                                    >
-                                                        Blog Title <span className="Errorspan">*</span>
-                                                    </SoftTypography>
-                                                </SoftBox>
-                                                <SoftInput
-                                                    {...register("blog_title", { required: true })}
-                                                    type="text"
-                                                    name="blog_title"
-                                                    placeholder="Blog Title "
-                                                />
-                                                {errors.blog_title && (
-                                                    <span className="Errorspan">
-                                                        * Please fill this field!
-                                                    </span>
-                                                )}
-                                            </SoftBox>
-                                        </Grid>
 
-                                        <Grid item xs={12} sm={12} md={3} lg={3}>
+                                        <Grid item xs={12} sm={12} md={4} lg={4}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography
@@ -251,7 +227,32 @@ function UpdateBlog() {
                                                 />
                                             </SoftBox>
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={4} lg={4}>
+
+                                            <Grid item xs={12} sm={12} md={6} lg={6}>
+                                                <SoftBox mb={2}>
+                                                    <SoftBox mb={1} ml={0.5}>
+                                                        <SoftTypography
+                                                            component="label"
+                                                            variant="caption"
+                                                            fontWeight="bold"
+                                                        >
+                                                            Blog Title <span className="Errorspan">*</span>
+                                                        </SoftTypography>
+                                                    </SoftBox>
+                                                    <SoftInput
+                                                        {...register("blog_title", { required: true })}
+                                                        type="text"
+                                                        name="blog_title"
+                                                        placeholder="Blog Title "
+                                                    />
+                                                    {errors.blog_title && (
+                                                        <span className="Errorspan">
+                                                            * Please fill this field!
+                                                        </span>
+                                                    )}
+                                                </SoftBox>
+                                            </Grid>
+                                        <Grid item xs={12} sm={12} md={6} lg={6}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography

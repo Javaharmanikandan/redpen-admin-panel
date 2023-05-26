@@ -113,9 +113,9 @@ function UpdateUpcomigEvents() {
         setLoad(true);
         let formData = new FormData(); //formdata object
 
-        data.event_image ? formData.append("image", data.event_image[0]) : "";
-        data.mobile_banner ? formData.append("mobile_banner", data.mobile_banner[0]) : "";
-        data.desktop_banner ? formData.append("desktop_banner", data.desktop_banner[0]) : "";
+        formData.append("image", data.event_image[0]);
+        formData.append("mobile_banner", data.mobile_banner[0]);
+        formData.append("desktop_banner", data.desktop_banner[0]);
         formData.append("event_category", data.event_category);
         formData.append("event_date", data.event_date);
         formData.append("event_time", data.event_time);

@@ -95,12 +95,13 @@ function UpdateBlog() {
     const onSubmit = async (data) => {
         setLoad(true);
         let formData = new FormData(); //formdata object
-        data.blog_image ? formData.append("blog_image", data.blog_image[0]) : "";
+        formData.append("blog_image", data.blog_image[0]);
         formData.append("category_id", data.category_id);
         formData.append("date", data.date);
         formData.append("blog_title", data.blog_title);
         formData.append("post_by", data.post_by);
         formData.append("post_type", data.post_type);
+        formData.append("blog_url", data.blog_url);
         formData.append("blog_describtion", content);
         formData.append("blog_tags", JSON.stringify(inputList));
         const dataPost = await AuthApi.PostmethodWithFile(

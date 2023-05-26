@@ -106,7 +106,9 @@ function ViewBlog() {
                                             <th className="text-center">Id</th>
                                             <th className="text-center">Category name</th>
                                             <th className="text-center">Title</th>
-                                            <th className="text-center">Image</th>
+                                            <th className="text-center">Blog image</th>
+                                            <th className="text-center">Mobile banner</th>
+                                            <th className="text-center">Desktop banner</th>
                                             <th className="text-center">Post type</th>
                                             <th className="text-center">Post by</th>
                                             <th className="text-center">Blog URL</th>
@@ -123,6 +125,8 @@ function ViewBlog() {
                                                 <td>{result.categories ? result.categories.category_name:""}</td>
                                                 <td>{result.blog_title}</td>
                                                 <td><img src={IMG_URL + result.blog_image} width={75} height={75} /></td>
+                                                <td><img src={IMG_URL + result.mobile_banner} width={75} height={75} /></td>
+                                                <td><img src={IMG_URL + result.desktop_banner} width={75} height={75} /></td>
                                                 <td>{result.post_by}</td>
                                                 <td>{result.post_type}</td>
                                                 <td>{result.blog_url}</td>

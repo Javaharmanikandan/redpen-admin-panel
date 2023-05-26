@@ -79,6 +79,8 @@ function CreateBlog() {
         setLoad(true);
         let formData = new FormData(); //formdata object
         formData.append("blog_image", data.blog_image[0]);
+        formData.append("mobile_banner", data.mobile_banner[0]);
+        formData.append("desktop_banner", data.desktop_banner[0]);
         formData.append("category_id", data.category_id);
         formData.append("date", data.date);
         formData.append("blog_title", data.blog_title);
@@ -130,7 +132,7 @@ function CreateBlog() {
                                     onSubmit={handleSubmit(onSubmit)}
                                 >
                                     <Grid container spacing={2}>
-                                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                                        <Grid item xs={12} sm={12} md={3} lg={3}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography
@@ -167,7 +169,7 @@ function CreateBlog() {
                                             </SoftBox>
                                         </Grid>
 
-                                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                                        <Grid item xs={12} sm={12} md={3} lg={3}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography
@@ -194,7 +196,7 @@ function CreateBlog() {
 
                                      
 
-                                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                                        <Grid item xs={12} sm={12} md={2} lg={2}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography
@@ -217,6 +219,54 @@ function CreateBlog() {
                                                     </span>
                                                 )}
                                             </SoftBox>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={2} lg={2}>
+                                                <SoftBox mb={2}>
+                                                    <SoftBox mb={1} ml={0.5}>
+                                                        <SoftTypography
+                                                            component="label"
+                                                            variant="caption"
+                                                            fontWeight="bold"
+                                                        >
+                                                            Mobile Banner <span className="Errorspan">*</span>
+                                                        </SoftTypography>
+                                                    </SoftBox>
+                                                    <SoftInput
+                                                        {...register("mobile_banner", { required: true })}
+                                                        type="file"
+                                                        name="mobile_banner"
+                                                        placeholder="Mobile Banner"
+                                                    />
+                                                    {errors.mobile_banner && (
+                                                        <span className="Errorspan">
+                                                            * Please fill this field!
+                                                        </span>
+                                                    )}
+                                                </SoftBox>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={2} lg={2}>
+                                                <SoftBox mb={2}>
+                                                    <SoftBox mb={1} ml={0.5}>
+                                                        <SoftTypography
+                                                            component="label"
+                                                            variant="caption"
+                                                            fontWeight="bold"
+                                                        >
+                                                            Desktop Banner <span className="Errorspan">*</span>
+                                                        </SoftTypography>
+                                                    </SoftBox>
+                                                    <SoftInput
+                                                        {...register("desktop_banner", { required: true })}
+                                                        type="file"
+                                                        name="desktop_banner"
+                                                        placeholder="Desktop Banner"
+                                                    />
+                                                    {errors.desktop_banner && (
+                                                        <span className="Errorspan">
+                                                            * Please fill this field!
+                                                        </span>
+                                                    )}
+                                                </SoftBox>
                                             </Grid>
                                             
                                             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -268,7 +318,7 @@ function CreateBlog() {
                                             </SoftBox>
                                         </Grid>
 
-                                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                                        <Grid item xs={12} sm={12} md={6} lg={6}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography
@@ -293,7 +343,7 @@ function CreateBlog() {
                                             </SoftBox>
                                         </Grid>
 
-                                        <Grid item xs={12} sm={12} md={4} lg={4}>
+                                        <Grid item xs={12} sm={12} md={6} lg={6}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography

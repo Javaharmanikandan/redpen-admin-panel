@@ -74,7 +74,6 @@ function UpdateUpcomigEvents() {
         setValue("event_about", dataGet.data.data.event_about);
         setValue("event_sub_title", dataGet.data.data.event_sub_title);
         setValue("event_url", dataGet.data.data.event_url);
-        setValue('event_category', dataGet.data.data.event_category, { shouldValidate: true })
         const steps = dataGet.data.data.event_steps;
         const setps_array = await steps.map((data) => {
             return {
@@ -83,6 +82,10 @@ function UpdateUpcomigEvents() {
             };
         });
         setInputList(setps_array);
+        setTimeout(() => {
+            setValue('event_category', dataGet.data.data.event_category, { shouldValidate: true });
+
+        }, 1000);
         setLoad(false);
     };
 

@@ -26,6 +26,8 @@ import { useParams } from "react-router-dom";
 function UpdateShopMainCategory() {
     const { id } = useParams();
     const [load, setLoad] = useState(false);
+    const [colorsData, setColorsData] = useState([]);
+
     const {
         register: registerSub,
         handleSubmit: handleSubmitSub,
@@ -35,18 +37,31 @@ function UpdateShopMainCategory() {
     } = useForm();
 
     useEffect(() => {
+        getColors();
         getDetails();
+       
     }, []);
 
+    const getColors = async () => {
+        setLoad(true);
+        const dataGet = await AuthApi.GetMethod(
+            "/get-colors"
+        );
+
+        setColorsData(dataGet.data.data);
+        setLoad(false);
+    };
 
     const getDetails = async () => {
         setLoad(true);
         const dataGet = await AuthApi.GetMethod(
             "/get-shop-category/" + id,
         );
-        setValue("category_level", dataGet.data.data.category_level);
-        setValue("chip_text_color", dataGet.data.data.chip_text_color);
-        setValue("chip_background_color", dataGet.data.data.chip_background_color);
+        setTimeout(() => {
+            setValue("category_level", dataGet.data.data.category_level);
+            setValue("chip_text_color", dataGet.data.data.chip_text_color);
+            setValue("chip_background_color", dataGet.data.data.chip_background_color);
+        }, 1000);
         setValue("category_name", dataGet.data.data.category_name);
         setLoad(false);
     };
@@ -87,89 +102,54 @@ function UpdateShopMainCategory() {
                 <div className="loader-container">
                     <img style={{ width: 100, height: 100 }} src="https://cdn.dribbble.com/users/255512/screenshots/2235810/sa.gif"></img>
                 </div> :
-        <DashboardLayout>
-            <DashboardNavbar />
+                <DashboardLayout>
+                    <DashboardNavbar />
 
 
-            <SoftBox py={3}>
-                <SoftBox mb={3}>
-                    <Card>
-                        <SoftBox
-                            display="flex"
-                            justifyContent="space-between"
-                            alignItems="center"
-                            p={3}
-                        >
-                            <SoftTypography variant="h6">Update Shop Category </SoftTypography>
-                        </SoftBox>
-                        <form
-                            key={2}
-                            style={{ padding: "20px" }}
-                            onSubmit={handleSubmitSub(onSubmitSub)}
-                        >
-                            <Grid container spacing={2}>
+                    <SoftBox py={3}>
+                        <SoftBox mb={3}>
+                            <Card>
+                                <SoftBox
+                                    display="flex"
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    p={3}
+                                >
+                                    <SoftTypography variant="h6">Update Shop Category </SoftTypography>
+                                </SoftBox>
+                                <form
+                                    key={2}
+                                    style={{ padding: "20px" }}
+                                    onSubmit={handleSubmitSub(onSubmitSub)}
+                                >
+                                    <Grid container spacing={2}>
 
 
-                                <Grid item xs={12} sm={12} md={6} lg={6}>
-                                    <SoftBox mb={2}>
-                                        <SoftBox mb={1} ml={0.5}>
-                                            <SoftTypography
-                                                component="label"
-                                                variant="caption"
-                                                fontWeight="bold"
-                                            >
-                                                Shop  Category *
-                                            </SoftTypography>
-                                        </SoftBox>
-                                        <SoftInput
-                                            {...registerSub("category_name", { required: true })}
-                                            type="text"
-                                            name="category_name"
-                                            placeholder=" Category Name"
-                                        />
-                                        {errors.category_name && (
-                                            <span className="Errorspan">
-                                                * Please fill this field!
-                                            </span>
-                                        )}
-                                    </SoftBox>
-                                </Grid>
-
-                                <Grid item xs={12} sm={12} md={2} lg={2}>
-                                    <SoftBox mb={2}>
-                                        <SoftBox mb={1} ml={0.5}>
-                                            <SoftTypography
-                                                component="label"
-                                                variant="caption"
-                                                fontWeight="bold"
-                                            >
-                                                Category Level *
-                                            </SoftTypography>
-                                        </SoftBox>
-                                        <select
-                                            className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
-                                            name="gender"
-                                            {...registerSub("category_level", { required: true })}
-                                        >
-                                            <option value="" selected disabled hidden>
-                                                Select  Category level
-                                            </option>
-                                            <option value={1} >
-                                                Level 1
-                                            </option>
-                                            <option value={2}>
-                                                Level 2
-                                            </option>
-
-
-                                        </select>
-
-                                        {errors.category_level && (
-                                            <span className="Errorspan">
-                                                * Please fill this field!
-                                            </span>)}
-                                    </SoftBox>
+                                        <Grid item xs={12} sm={12} md={6} lg={6}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Shop  Category *
+                                                    </SoftTypography>
+                                                </SoftBox>
+                                                <SoftInput
+                                                    {...registerSub("category_name", { required: true })}
+                                                    type="text"
+                                                    name="category_name"
+                                                    placeholder=" Category Name"
+                                                />
+                                                {errors.category_name && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
                                         </Grid>
+
                                         <Grid item xs={12} sm={12} md={2} lg={2}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
@@ -178,32 +158,69 @@ function UpdateShopMainCategory() {
                                                         variant="caption"
                                                         fontWeight="bold"
                                                     >
-                                                        Text Color *
+                                                        Category Level *
                                                     </SoftTypography>
                                                 </SoftBox>
+                                                <select
+                                                    className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
+                                                    name="category_level"
+                                                    {...registerSub("category_level", { required: true })}
+                                                >
+                                                    <option value="" selected disabled hidden>
+                                                        Select  level
+                                                    </option>
+                                                    <option value={1} >
+                                                        Level 1
+                                                    </option>
+                                                    <option value={2}>
+                                                        Level 2
+                                                    </option>
+
+
+                                                </select>
+
+                                                {errors.category_level && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>)}
+                                            </SoftBox>
+                                        </Grid>
+
+                                        <Grid item xs={12} sm={12} md={2} lg={2}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Text Color <span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
+
                                                 <select
                                                     className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
                                                     name="chip_text_color"
+
                                                     {...registerSub("chip_text_color", { required: true })}
                                                 >
-                                                    <option value="" selected disabled hidden>
-                                                        Select  color
+                                                    <option value="" selected>
+                                                        Select color
                                                     </option>
-                                                    <option value={'#FBBB3B'} style={{ color: '#FBBB3B' }}>
-                                                        Pastel Orange
-                                                    </option>
-                                                    <option value={'#FFFFFF'} style={{ color: '#FFFFFF' }}>
-                                                        White
-                                                    </option>
-                                                    <option value={'#1A1757'} style={{ color: '#1A1757' }}>
-                                                        Space Cadet
-                                                    </option>
+                                                    {colorsData &&
+                                                        colorsData.map((result, index) => {
+                                                            return (
+                                                                <option value={result.id}>
+                                                                    {result.color_name}
+                                                                </option>
+                                                            );
+                                                        })}
                                                 </select>
-
                                                 {errors.chip_text_color && (
                                                     <span className="Errorspan">
                                                         * Please fill this field!
-                                                    </span>)}
+                                                    </span>
+                                                )}
                                             </SoftBox>
                                         </Grid>
 
@@ -215,79 +232,64 @@ function UpdateShopMainCategory() {
                                                         variant="caption"
                                                         fontWeight="bold"
                                                     >
-                                                        Background Color *
+                                                        Background Color <span className="Errorspan">*</span>
                                                     </SoftTypography>
                                                 </SoftBox>
+
                                                 <select
                                                     className="MuiInputBase-root MuiInputBase-colorPrimary css-y9gdep-MuiInputBase-root"
                                                     name="chip_background_color"
+
                                                     {...registerSub("chip_background_color", { required: true })}
                                                 >
-                                                    <option value="" selected disabled hidden>
-                                                        Select  color
+                                                    <option value="" selected>
+                                                        Select color
                                                     </option>
-                                                    <option value={'#1A1757'} style={{ backgroundColor: '#1A1757' }} >
-                                                        Space Cadet
-                                                    </option>
-                                                    <option value={'#0EA7AF'} style={{ backgroundColor: '#0EA7AF' }}>
-                                                        Blue-Green
-                                                    </option>
-                                                    <option value={'#D82128'} style={{ backgroundColor: '#D82128' }}>
-                                                        Amaranth Red
-                                                    </option>
-                                                    <option value={'#8080A1'} style={{ backgroundColor: '#8080A1' }}>
-                                                        Light Slate Gray
-                                                    </option>
-                                                    <option value={'#404040'} style={{ backgroundColor: '#404040' }} >
-                                                        Black Olive
-                                                    </option>
-                                                    <option value={'#26797D'} style={{ backgroundColor: '#26797D' }}>
-                                                        Celadon Green
-                                                    </option>
-                                                    <option value={'#DAD2D8'} style={{ backgroundColor: '#DAD2D8' }}>
-                                                        Light Silver
-                                                    </option>
-                                                    <option value={'#FBBB3B'} style={{ backgroundColor: '#FBBB3B' }}>
-                                                        Pastel Orange
-                                                    </option>
+                                                    {colorsData &&
+                                                        colorsData.map((result, index) => {
+                                                            return (
+                                                                <option value={result.id}>
+                                                                    {result.color_name}
+                                                                </option>
+                                                            );
+                                                        })}
                                                 </select>
-
                                                 {errors.chip_background_color && (
                                                     <span className="Errorspan">
                                                         * Please fill this field!
-                                                    </span>)}
+                                                    </span>
+                                                )}
                                             </SoftBox>
                                         </Grid>
-
-                                <Grid item xs={12} sm={12} md={12} lg={12}>
-                                    <Box
-                                        display={"flex"}
-                                        alignItems={"center"}
-                                        justifyContent="center"
-                                        pt={4.7}
-                                    >
-                                        <SoftBox>
-                                            <SoftButton
-                                                type="submit"
-                                                variant="gradient"
-                                                color="dark"
-                                                fullWidth
+                                        <Grid item xs={12} sm={12} md={12} lg={12}>
+                                            <Box
+                                                display={"flex"}
+                                                alignItems={"center"}
+                                                justifyContent="center"
+                                                pt={4.7}
                                             >
-                                                Update Shop Category
-                                            </SoftButton>
+                                                <SoftBox>
+                                                    <SoftButton
+                                                        type="submit"
+                                                        variant="gradient"
+                                                        color="dark"
+                                                        fullWidth
+                                                    >
+                                                        Update  Category
+                                                    </SoftButton>
 
-                                        </SoftBox>
-                                    </Box>
-                                </Grid>
-                            </Grid>
-                        </form>
-                    </Card>
-                </SoftBox>
-            </SoftBox>
+                                                </SoftBox>
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </form>
+                            </Card>
+                        </SoftBox>
+                    </SoftBox>
 
 
-            <Footer />
-        </DashboardLayout>
+                    <Footer />
+                </DashboardLayout>
             }</>);
 }
 

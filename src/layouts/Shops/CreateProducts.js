@@ -24,7 +24,7 @@ function CreateProducts() {
   const [MainCategoryData, setMainCategoryData] = useState([]);
   const [load, setLoad] = useState(false);
   const [inputList, setInputList] = useState([
-    { also_receive: "" },
+    { also_content: "" },
   ]);
 
   const [inputListFaq, setInputListFaq] = useState([{ question: "" ,answer:"" }]);
@@ -49,7 +49,7 @@ function CreateProducts() {
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { also_receive: "" }]);
+    setInputList([...inputList, { also_content: "" }]);
   };
 
 
@@ -131,7 +131,7 @@ function CreateProducts() {
       toast.error(dataPost.data.message);
     }
    
-    setInputList([{ also_receive: "" }]);
+    setInputList([{ also_content: "" }]);
     setLoad(false);
   };
 
@@ -362,7 +362,7 @@ function CreateProducts() {
                         <div style={{ display: "flex", padding: 10 }}>
                           <SoftInput
                             type="text"
-                            name="also_receive"
+                            name="also_content"
                             placeholder="Content"
                             value={x.also_content}
                             onChange={(e) => handleInputChange(e, i)}

@@ -72,7 +72,8 @@ function UpdateBlog() {
         const dataGet = await AuthApi.GetMethod(
             "/get-blog/" + id,
         );
-        setValue("category_id", dataGet.data.data.category_id);
+     
+        
         setValue("date", dataGet.data.data.date);
         setValue("blog_title", dataGet.data.data.blog_title);
         setValue("blog_describtion", dataGet.data.data.blog_describtion);
@@ -84,6 +85,9 @@ function UpdateBlog() {
         for (let index = 0; index < tags.length; index++) {
      
         }
+        setTimeout(() => {
+            setValue("category_id", dataGet.data.data.category_id);
+        }, 1000);
         setLoad(false);
     };
 

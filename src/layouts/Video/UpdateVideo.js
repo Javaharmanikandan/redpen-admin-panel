@@ -46,12 +46,15 @@ function UpdateVideo() {
         );
         console.log(dataGet.data.data);
         setValue("youtube_url", dataGet.data.data.youtube_url);
-        setValue("category_id", dataGet.data.data.category_id);
         setValue("title", dataGet.data.data.title);
         setValue("description", dataGet.data.data.description);
         setValue("duration", dataGet.data.data.duration);
         setValue("post_by", dataGet.data.data.post_by);
         setValue("video_type", dataGet.data.data.video_type);
+        setTimeout(() => {
+            setValue("category_id", dataGet.data.data.category_id);
+
+        }, 1000);
         setLoad(false);
   };
 

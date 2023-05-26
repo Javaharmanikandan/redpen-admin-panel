@@ -122,8 +122,8 @@ function ViewShopMainCategory() {
                                                 <td>{index + 1}</td>
                                                 <td>{result.category_name}</td>
                                                 <td>{result.category_level}</td>
-                                                <td style={{ backgroundColor: result.chip_text_color }}></td>
-                                                <td style={{ backgroundColor: result.chip_background_color }}></td>
+                                                <td>{result.chip_text_colors && result.chip_text_colors.color_name}</td>
+                                                <td>{result.chip_background_colors && result.chip_background_colors.color_name}</td>
                                                 <td>     <Link to={'/update-shop-category/' + result.id}>
                                                     <TbEdit size={20} color={"blue"} />
                                                 </Link></td>

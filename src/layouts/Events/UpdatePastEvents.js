@@ -45,10 +45,14 @@ function UpdatePastEvents() {
         const dataGet = await AuthApi.GetMethod(
             "/get-past-events/" + id,
         );
-        setValue("event_category", dataGet.data.data.event_category, { shouldValidate: true });
+
         setValue("event_date", dataGet.data.data.event_date);
         setValue("event_title", dataGet.data.data.event_title);
         setValue("event_youtube_url", dataGet.data.data.event_youtube_url);
+        setTimeout(() => {
+            setValue("event_category", dataGet.data.data.event_category, { shouldValidate: true });
+
+        }, 1000);
         setLoad(false);
     };
 

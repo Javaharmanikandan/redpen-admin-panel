@@ -24,9 +24,11 @@ function UpdateProducts() {
     const { id } = useParams();
     const [MainCategoryData, setMainCategoryData] = useState([]);
 
-    const [inputList, setInputList] = useState([]);
+    const [inputList, setInputList] = useState([
+        { also_content: "" },
+    ]);
 
-    const [inputListFaq, setInputListFaq] = useState([]);
+    const [inputListFaq, setInputListFaq] = useState([{ question: "", answer: "" }]);
     const [load, setLoad] = useState(false);
 
     // handle input change
@@ -92,7 +94,6 @@ function UpdateProducts() {
         const dataGet = await AuthApi.GetMethod(
             "/get-products/" + id,
         );
-        setValue("product_category", dataGet.data.data.product_category);
         setValue("product_name", dataGet.data.data.product_name);
         setValue("product_price", dataGet.data.data.product_price);
         setValue("product_description", dataGet.data.data.product_description);
@@ -110,6 +111,10 @@ function UpdateProducts() {
             };
         });
         setInputListFaq(faqs_array);
+        setTimeout(() => {
+            setValue("product_category", dataGet.data.data.product_category);
+
+        }, 1000);
         setLoad(false);
     };
 
@@ -127,7 +132,7 @@ function UpdateProducts() {
     const onSubmit = async (data) => {
         setLoad(true);
         let formData = new FormData(); //formdata object
-        data.product_image ? formData.append("product_image", data.product_image[0]):"";
+        formData.append("product_image", data.product_image[0]);
         formData.append("product_category", data.product_category);
         formData.append("product_name", data.product_name);
         formData.append("product_price", data.product_price);
@@ -370,7 +375,7 @@ function UpdateProducts() {
                                                 <div style={{ display: "flex", padding: 10 }}>
                                                     <SoftInput
                                                         type="text"
-                                                        name="also_receive"
+                                                        name="also_content"
                                                         placeholder="Content"
                                                         value={x.also_content}
                                                         onChange={(e) => handleInputChange(e, i)}

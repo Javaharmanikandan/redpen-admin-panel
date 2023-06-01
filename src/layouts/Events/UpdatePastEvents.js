@@ -75,14 +75,13 @@ function UpdatePastEvents() {
 
     const onSubmit = async (data) => {
         setLoad(true);
-        const payLoad = {
-            event_category: data.event_category,
-            event_date: data.event_date,
-            event_title: data.event_title,
-            event_youtube_url: data.event_youtube_url,
-        };
-
-        const dataPost = await AuthApi.Postmethod("/update-past-events/"+id, payLoad);
+        let formData = new FormData(); //formdata object
+        formData.append("event_thumbnail_image", data.event_thumbnail_image[0]);
+        formData.append("event_category", data.event_category);
+        formData.append("event_date", data.event_date);
+        formData.append("event_title", data.event_title);
+        formData.append("event_youtube_url", data.event_youtube_url);
+        const dataPost = await AuthApi.PostmethodWithFile("/update-past-events/" + id, formData);
         if (dataPost.data.status) {
             toast.success(dataPost.data.message);
         } else {
@@ -230,7 +229,29 @@ function UpdatePastEvents() {
                                             </span>
                                         )}
                                     </SoftBox>
-                                </Grid>
+                                        </Grid>
+                                        
+
+                                        <Grid item xs={12} sm={12} md={6} lg={6}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Thumbnail Image 
+                                                    </SoftTypography>
+                                                </SoftBox>
+                                                <SoftInput
+                                                    {...register("event_thumbnail_image")}
+                                                    type="file"
+                                                    name="event_thumbnail_image"
+                                                    placeholder="Thumbnail Image"
+                                                />
+                                         
+                                            </SoftBox>
+                                        </Grid>
                             </Grid>
 
                             <Box

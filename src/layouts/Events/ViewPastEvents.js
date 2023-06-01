@@ -108,7 +108,7 @@ function ViewPastEvents() {
                                             <th className="text-center">Date</th>
                                             <th className="text-center">Title</th>
                                             <th className="text-center">Youtube URL</th>
-                                            <th className="text-center">Youtube Image</th>
+                                            <th className="text-center">Thumbnail Image</th>
                                             <th className="text-center">Edit</th>
                                             <th className="text-center">Delete</th>
 
@@ -123,7 +123,7 @@ function ViewPastEvents() {
                                                 <td>{result.event_date}</td>
                                                 <td>{result.event_title}</td>
                                                 <td>{result.event_youtube_url}</td>
-                                                <td><img src={result.event_thumbnail_image} width={75} height={75} /></td>
+                                                <td><img src={IMG_URL + result.event_thumbnail_image} width={75} height={75} /></td>
                                                 <td>     <Link to={'/update-past-events/' + result.id}>
                                                     <TbEdit size={20} color={"blue"} />
                                                 </Link></td>

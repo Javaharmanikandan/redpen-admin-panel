@@ -68,6 +68,7 @@ function UpdateUpcomigEvents() {
             "/get-upcoming-events/" + id,
         );
         setValue("event_title", dataGet.data.data.event_title);
+        setValue("event_short_description", dataGet.data.data.event_short_description);
         setValue("event_date", dataGet.data.data.event_date);
         setValue("event_time", dataGet.data.data.event_time);
         setValue("event_location", dataGet.data.data.event_location);
@@ -120,6 +121,7 @@ function UpdateUpcomigEvents() {
         formData.append("event_date", data.event_date);
         formData.append("event_time", data.event_time);
         formData.append("event_title", data.event_title);
+        formData.append("event_short_description", data.event_short_description);
         formData.append("event_location", data.event_location);
         formData.append("event_about", data.event_about);
         formData.append("event_sub_title", data.event_sub_title);
@@ -415,6 +417,38 @@ function UpdateUpcomigEvents() {
                                                     placeholder="Sub title"
                                                 />
                                                 {errors.event_sub_title && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={12} lg={12}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Event Short Description <span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
+
+                                                <textarea
+                                                    placeholder="Short description."
+                                                    style={{
+                                                        width: "100%",
+                                                        height: 120,
+                                                        border: "0.0625rem solid #d2d6da",
+                                                        padding: "12px 20px",
+                                                        fontSize: "16px",
+                                                        borderRadius: 10,
+                                                    }}
+                                                    name="event_short_description"
+                                                    {...register("event_short_description", { required: true })}
+                                                ></textarea>
+                                                {errors.event_short_description && (
                                                     <span className="Errorspan">
                                                         * Please fill this field!
                                                     </span>

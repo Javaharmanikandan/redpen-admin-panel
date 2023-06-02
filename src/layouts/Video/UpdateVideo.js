@@ -44,7 +44,6 @@ function UpdateVideo() {
         const dataGet = await AuthApi.GetMethod(
             "/get-video/" + id,
         );
-        console.log(dataGet.data.data);
         setValue("youtube_url", dataGet.data.data.youtube_url);
         setValue("title", dataGet.data.data.title);
         setValue("duration", dataGet.data.data.duration);
@@ -71,16 +70,17 @@ function UpdateVideo() {
 
     const onSubmit = async (data) => {
         setLoad(true);
-        const payLoad = {
-            youtube_url: data.youtube_url,
-            category_id: data.category_id,
-            title: data.title,
-            duration: data.duration,
-            post_by: data.post_by,
-            video_type: data.video_type,
-        };
 
-        const dataPost = await AuthApi.Postmethod("/update-video/"+id, payLoad);
+        let formData = new FormData(); //formdata object
+        formData.append("thumbnail_image", data.thumbnail_image[0]);
+        formData.append("youtube_url", data.youtube_url);
+        formData.append("category_id", data.category_id);
+        formData.append("title", data.title);
+        formData.append("post_by", data.post_by);
+        formData.append("video_type", data.video_type);
+
+
+        const dataPost = await AuthApi.PostmethodWithFile("/update-video/" + id, formData);
         if (dataPost.data.status) {
             toast.success(dataPost.data.message);
         } else {
@@ -205,7 +205,7 @@ function UpdateVideo() {
                                                         Recent Video
                                                     </option>
                                                     <option value="feature">
-                                                        Featured Video
+                                                        Feature Video
                                                     </option>
                                                 </select>
                                                 {errors.video_type && (
@@ -240,7 +240,33 @@ function UpdateVideo() {
                                                 )}
                                             </SoftBox>
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={2} lg={2}>
+                                  
+                                        <Grid item xs={12} sm={12} md={6} lg={6}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Youtube URL <span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
+                                                <SoftInput
+                                                    {...register("youtube_url", { required: true })}
+                                                    type="text"
+                                                    name="youtube_url"
+                                                    placeholder="Youtube URL "
+                                                />
+                                                {errors.youtube_url && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
+                                        </Grid>
+
+                                        <Grid item xs={12} sm={12} md={4} lg={4}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography
@@ -272,23 +298,18 @@ function UpdateVideo() {
                                                         variant="caption"
                                                         fontWeight="bold"
                                                     >
-                                                        Youtube URL <span className="Errorspan">*</span>
+                                                        Thumbnail Image <span className="Errorspan">*</span>
                                                     </SoftTypography>
                                                 </SoftBox>
                                                 <SoftInput
-                                                    {...register("youtube_url", { required: true })}
-                                                    type="text"
-                                                    name="youtube_url"
-                                                    placeholder="Youtube URL "
+                                                    {...register("thumbnail_image")}
+                                                    type="file"
+                                                    name="thumbnail_image"
+                                                    placeholder="Thumbnail Image"
                                                 />
-                                                {errors.youtube_url && (
-                                                    <span className="Errorspan">
-                                                        * Please fill this field!
-                                                    </span>
-                                                )}
+                                          
                                             </SoftBox>
                                         </Grid>
-                         
                                     </Grid>
 
                                     <Box

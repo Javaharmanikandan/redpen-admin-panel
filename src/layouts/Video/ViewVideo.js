@@ -124,7 +124,7 @@ function ViewVideo() {
                                             return (<tr key={index}>
                                                 <td>{index + 1}</td>
                                                 <td>{result.youtube_url}</td>
-                                                <td><img src={result.thumbnail_image} width={75} height={75} /></td>
+                                                <td><img src={IMG_URL + result.thumbnail_image} width={75} height={75} /></td>
                                                 <td>{result.title}</td>
                                                 <td>{result.duration}</td>
                                                 <td>{result.category ? result.category.category_name:""}</td>

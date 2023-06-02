@@ -109,7 +109,10 @@ function ViewProducts() {
                                             <th className="text-center">Category</th>
                                             <th className="text-center">Name</th>
                                             <th className="text-center">Image</th>
-                                            <th className="text-center">Price</th>
+                                            <th className="text-center">Payment link (INR)</th>
+                                            <th className="text-center">Payment link (USD)</th>
+                                            <th className="text-center">Price (INR)</th>
+                                            <th className="text-center">Price (USD)</th>
                                             <th className="text-center">Product URL</th>
                                             <th className="text-center">Edit</th>
                                             <th className="text-center">Delete</th>
@@ -124,7 +127,10 @@ function ViewProducts() {
                                                 <td>{result.shop_categories ? result.shop_categories.category_name:""}</td>
                                                 <td>{result.product_name}</td>
                                                 <td><img src={IMG_URL + result.product_image} width={75} height={75} /></td>
-                                                <td>{result.product_price}</td>
+                                                <td>{result.payment_link_inr}</td>
+                                                <td>{result.payment_link_usd}</td>
+                                                <td>{result.product_price_inr}</td>
+                                                <td>{result.product_price_usd}</td>
                                                 <td>{result.product_url}</td>
                                                 <td>     <Link to={'/update-products/' + result.id}>
                                                     <TbEdit size={20} color={"blue"} />

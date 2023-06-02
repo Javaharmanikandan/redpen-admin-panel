@@ -19,9 +19,12 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import AuthApi from "api/auth";
 import { TbGitPullRequestClosed } from "react-icons/tb";
+import Select from 'react-select';
 
 function CreateProducts() {
   const [MainCategoryData, setMainCategoryData] = useState([]);
+  const [productName, setProductName] = useState([]);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [load, setLoad] = useState(false);
   const [inputList, setInputList] = useState([
     { also_content: "" },
@@ -80,6 +83,10 @@ function CreateProducts() {
   };
 
 
+  function handleInputChangeRelated(data) {
+    setRelatedProducts(data);
+  }
+
   const {
     register,
     handleSubmit,
@@ -90,6 +97,7 @@ function CreateProducts() {
 
   useEffect(() => {
     getmainCategoryData();
+    getProductName();
   }, []);
 
   const getmainCategoryData = async () => {
@@ -105,6 +113,17 @@ function CreateProducts() {
     setLoad(false);
   };
 
+  const getProductName = async () => {
+
+    setLoad(true);
+    const dataGet = await AuthApi.GetMethod(
+      "/get-products-name"
+    );
+    setProductName(dataGet.data.data);
+    setLoad(false);
+  };
+
+
   //To Insert All Data
 
   const onSubmit = async (data) => {
@@ -113,9 +132,14 @@ function CreateProducts() {
     formData.append("product_image", data.product_image[0]);
     formData.append("product_category", data.product_category);
     formData.append("product_name", data.product_title);
-    formData.append("product_price", data.product_price);
+    formData.append("payment_link_inr", data.payment_link_inr);
+    formData.append("payment_link_usd", data.payment_link_usd);
+    formData.append("product_price_inr", data.product_price_inr);
+    formData.append("product_price_usd", data.product_price_usd);
+    formData.append("product_short_description", data.product_short_description);
     formData.append("product_description", data.product_description);
     formData.append("product_url", data.product_url);
+    formData.append("related_products", JSON.stringify(relatedProducts));
     formData.append("also_receive", JSON.stringify(inputList));
     formData.append("faq", JSON.stringify(inputListFaq));
 
@@ -236,7 +260,7 @@ function CreateProducts() {
                   </SoftBox>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={4} lg={4}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -261,32 +285,9 @@ function CreateProducts() {
                   </SoftBox>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={4} lg={4}>
-                  <SoftBox mb={2}>
-                    <SoftBox mb={1} ml={0.5}>
-                      <SoftTypography
-                        component="label"
-                        variant="caption"
-                        fontWeight="bold"
-                      >
-                        Product Price ₹.<span className="Errorspan">*</span>
-                      </SoftTypography>
-                    </SoftBox>
-                    <SoftInput
-                      {...register("product_price", { required: true })}
-                      type="text"
-                      name="product_price"
-                      placeholder=" ₹ Product Price"
-                    />
-                    {errors.event_location && (
-                      <span className="Errorspan">
-                        * Please fill this field!
-                      </span>
-                    )}
-                  </SoftBox>
-                </Grid>
+        
 
-                <Grid item xs={12} sm={12} md={4} lg={4}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
                   <SoftBox mb={2}>
                     <SoftBox mb={1} ml={0.5}>
                       <SoftTypography
@@ -310,6 +311,134 @@ function CreateProducts() {
                     )}
                   </SoftBox>
                 </Grid>
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
+                      <SoftBox mb={2}>
+                        <SoftBox mb={1} ml={0.5}>
+                          <SoftTypography
+                            component="label"
+                            variant="caption"
+                            fontWeight="bold"
+                          >
+                             Payment link (INR)<span className="Errorspan">*</span>
+                          </SoftTypography>
+                        </SoftBox>
+                        <SoftInput
+                          {...register("payment_link_inr", { required: true })}
+                          type="text"
+                          name="payment_link_inr"
+                          placeholder="Payment link (INR)"
+                        />
+                        {errors.payment_link_inr && (
+                          <span className="Errorspan">
+                            * Please fill this field!
+                          </span>
+                        )}
+                      </SoftBox>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
+                      <SoftBox mb={2}>
+                        <SoftBox mb={1} ml={0.5}>
+                          <SoftTypography
+                            component="label"
+                            variant="caption"
+                            fontWeight="bold"
+                          >
+                            Payment link (USD)<span className="Errorspan">*</span>
+                          </SoftTypography>
+                        </SoftBox>
+                        <SoftInput
+                          {...register("payment_link_usd", { required: true })}
+                          type="text"
+                          name="payment_link_usd"
+                          placeholder="Payment link (USD)"
+                        />
+                        {errors.payment_link_usd && (
+                          <span className="Errorspan">
+                            * Please fill this field!
+                          </span>
+                        )}
+                      </SoftBox>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
+                      <SoftBox mb={2}>
+                        <SoftBox mb={1} ml={0.5}>
+                          <SoftTypography
+                            component="label"
+                            variant="caption"
+                            fontWeight="bold"
+                          >
+                            Product Price (INR)<span className="Errorspan">*</span>
+                          </SoftTypography>
+                        </SoftBox>
+                        <SoftInput
+                          {...register("product_price_inr", { required: true })}
+                          type="text"
+                          name="product_price_inr"
+                          placeholder="Product Price (INR)"
+                        />
+                        {errors.product_price_inr && (
+                          <span className="Errorspan">
+                            * Please fill this field!
+                          </span>
+                        )}
+                      </SoftBox>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
+                      <SoftBox mb={2}>
+                        <SoftBox mb={1} ml={0.5}>
+                          <SoftTypography
+                            component="label"
+                            variant="caption"
+                            fontWeight="bold"
+                          >
+                            Product Price (USD)<span className="Errorspan">*</span>
+                          </SoftTypography>
+                        </SoftBox>
+                        <SoftInput
+                          {...register("product_price_usd", { required: true })}
+                          type="text"
+                          name="product_price_usd"
+                          placeholder="Product Price (USD)"
+                        />
+                        {errors.product_price_usd && (
+                          <span className="Errorspan">
+                            * Please fill this field!
+                          </span>
+                        )}
+                      </SoftBox>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                      <SoftBox mb={2}>
+                        <SoftBox mb={1} ml={0.5}>
+                          <SoftTypography
+                            component="label"
+                            variant="caption"
+                            fontWeight="bold"
+                          >
+                            Product Short Description <span className="Errorspan">*</span>
+                          </SoftTypography>
+                        </SoftBox>
+
+                        <textarea
+                          placeholder="Short description."
+                          style={{
+                            width: "100%",
+                            height: 120,
+                            border: "0.0625rem solid #d2d6da",
+                            padding: "12px 20px",
+                            fontSize: "16px",
+                            borderRadius: 10,
+                          }}
+                          name="product_short_description"
+                          {...register("product_short_description", { required: true })}
+                        ></textarea>
+                        {errors.product_short_description && (
+                          <span className="Errorspan">
+                            * Please fill this field!
+                          </span>
+                        )}
+                      </SoftBox>
+                    </Grid>
 
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                   <SoftBox mb={2}>
@@ -343,6 +472,30 @@ function CreateProducts() {
                     )}
                   </SoftBox>
                 </Grid>
+
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                      <SoftBox mb={2}>
+                        <SoftBox mb={1} ml={0.5}>
+                          <SoftTypography
+                            component="label"
+                            variant="caption"
+                            fontWeight="bold"
+                          >
+                            Related Products <span className="Errorspan">*</span>
+                          </SoftTypography>
+                        </SoftBox>
+
+                        <Select
+                        name="related_products"
+                          isMulti
+                          onChange={handleInputChangeRelated}
+                          options={productName}
+                          required={true}
+                          isSearchable={true}
+                        />
+                    
+                      </SoftBox>
+                    </Grid>
 
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                   <SoftBox mb={2}>

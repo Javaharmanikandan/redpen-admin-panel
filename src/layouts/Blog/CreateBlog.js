@@ -86,6 +86,7 @@ function CreateBlog() {
         formData.append("blog_title", data.blog_title);
         formData.append("post_by", data.post_by);
         formData.append("post_type", data.post_type);
+        formData.append("blog_short_description", data.blog_short_description);
         formData.append("blog_describtion", content);
         formData.append("blog_url", data.blog_url);
         formData.append("blog_tags", JSON.stringify(inputList));
@@ -367,7 +368,38 @@ function CreateBlog() {
                                                 )}
                                             </SoftBox>
                                         </Grid>
+                                            <Grid item xs={12} sm={12} md={12} lg={12}>
+                                                <SoftBox mb={2}>
+                                                    <SoftBox mb={1} ml={0.5}>
+                                                        <SoftTypography
+                                                            component="label"
+                                                            variant="caption"
+                                                            fontWeight="bold"
+                                                        >
+                                                            Blog Short Description <span className="Errorspan">*</span>
+                                                        </SoftTypography>
+                                                    </SoftBox>
 
+                                                    <textarea
+                                                        placeholder="Short description."
+                                                        style={{
+                                                            width: "100%",
+                                                            height: 120,
+                                                            border: "0.0625rem solid #d2d6da",
+                                                            padding: "12px 20px",
+                                                            fontSize: "16px",
+                                                            borderRadius: 10,
+                                                        }}
+                                                        name="blog_short_description"
+                                                        {...register("blog_short_description", { required: true })}
+                                                    ></textarea>
+                                                    {errors.blog_short_description && (
+                                                        <span className="Errorspan">
+                                                            * Please fill this field!
+                                                        </span>
+                                                    )}
+                                                </SoftBox>
+                                            </Grid>
                                         <Grid item xs={12} sm={12} md={12} lg={12}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>

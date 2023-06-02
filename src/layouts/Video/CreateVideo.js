@@ -49,17 +49,17 @@ function CreateVideo() {
 
     const onSubmit = async (data) => {
         setLoad(true);
-        const payLoad = {
-            youtube_url: data.youtube_url,
-            category_id: data.category_id,
-            title: data.title,
-            duration: data.duration,
-            post_by: data.post_by,
-            video_type: data.video_type,
+        let formData = new FormData(); //formdata object
+        formData.append("thumbnail_image", data.thumbnail_image[0]);
+        formData.append("youtube_url", data.youtube_url);
+        formData.append("category_id", data.category_id);
+        formData.append("title", data.title);
+        formData.append("duration", data.duration);
+        formData.append("post_by", data.post_by);
+        formData.append("video_type", data.video_type);
 
-        };
 
-        const dataPost = await AuthApi.Postmethod("/create-video", payLoad);
+        const dataPost = await AuthApi.PostmethodWithFile("/create-video", formData);
         if (dataPost.data.status) {
             toast.success(dataPost.data.message);
             reset();
@@ -151,7 +151,7 @@ function CreateVideo() {
                                                     {...register("post_by", { required: true })}
                                                     type="text"
                                                     name="post_by"
-                                                    placeholder="Post BY "
+                                                    placeholder="Post Type"
                                                 />
                                                 {errors.post_by && (
                                                     <span className="Errorspan">
@@ -185,7 +185,7 @@ function CreateVideo() {
                                                         Recent Video
                                                     </option>
                                                     <option value="feature">
-                                                        Featured Video
+                                                        Feature Video
                                                     </option>
                                                 </select>
                                                 {errors.video_type && (
@@ -220,7 +220,32 @@ function CreateVideo() {
                                                 )}
                                             </SoftBox>
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={2} lg={2}>
+                             
+                                        <Grid item xs={12} sm={12} md={6} lg={6}>
+                                            <SoftBox mb={2}>
+                                                <SoftBox mb={1} ml={0.5}>
+                                                    <SoftTypography
+                                                        component="label"
+                                                        variant="caption"
+                                                        fontWeight="bold"
+                                                    >
+                                                        Youtube URL <span className="Errorspan">*</span>
+                                                    </SoftTypography>
+                                                </SoftBox>
+                                                <SoftInput
+                                                    {...register("youtube_url", { required: true })}
+                                                    type="text"
+                                                    name="youtube_url"
+                                                    placeholder="Youtube URL "
+                                                />
+                                                {errors.youtube_url && (
+                                                    <span className="Errorspan">
+                                                        * Please fill this field!
+                                                    </span>
+                                                )}
+                                            </SoftBox>
+                                        </Grid>
+                                        <Grid item xs={12} sm={12} md={4} lg={4}>
                                             <SoftBox mb={2}>
                                                 <SoftBox mb={1} ml={0.5}>
                                                     <SoftTypography
@@ -252,16 +277,16 @@ function CreateVideo() {
                                                         variant="caption"
                                                         fontWeight="bold"
                                                     >
-                                                        Youtube URL <span className="Errorspan">*</span>
+                                                        Thumbnail Image <span className="Errorspan">*</span>
                                                     </SoftTypography>
                                                 </SoftBox>
                                                 <SoftInput
-                                                    {...register("youtube_url", { required: true })}
-                                                    type="text"
-                                                    name="youtube_url"
-                                                    placeholder="Youtube URL "
+                                                    {...register("thumbnail_image", { required: true })}
+                                                    type="file"
+                                                    name="thumbnail_image"
+                                                    placeholder="Thumbnail Image"
                                                 />
-                                                {errors.youtube_url && (
+                                                {errors.thumbnail_image && (
                                                     <span className="Errorspan">
                                                         * Please fill this field!
                                                     </span>

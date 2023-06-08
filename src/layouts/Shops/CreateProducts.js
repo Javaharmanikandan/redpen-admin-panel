@@ -481,7 +481,7 @@ function CreateProducts() {
                             variant="caption"
                             fontWeight="bold"
                           >
-                            Related Products <span className="Errorspan">*</span>
+                            Related Products 
                           </SoftTypography>
                         </SoftBox>
 
@@ -490,7 +490,6 @@ function CreateProducts() {
                           isMulti
                           onChange={handleInputChangeRelated}
                           options={productName}
-                          required={true}
                           isSearchable={true}
                         />
                     
@@ -506,7 +505,6 @@ function CreateProducts() {
                         fontWeight="bold"
                       >
                         Also Receive Content{" "}
-                        <span className="Errorspan">*</span>
                       </SoftTypography>
                     </SoftBox>
 

@@ -521,7 +521,6 @@ function UpdateProducts() {
                                                     onChange={handleInputChangeRelated}
                                                     options={productName}
                                                     value={relatedProducts}
-                                                    required={true}
                                                     isSearchable={true}
                                                 />
 
@@ -537,7 +536,6 @@ function UpdateProducts() {
                                                 fontWeight="bold"
                                             >
                                                 Also Receive Content{" "}
-                                                <span className="Errorspan">*</span>
                                             </SoftTypography>
                                         </SoftBox>
 

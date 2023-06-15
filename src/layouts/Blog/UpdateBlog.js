@@ -395,6 +395,7 @@ function UpdateBlog() {
                                                             fontSize: "16px",
                                                             borderRadius: 10,
                                                         }}
+                                                        maxLength={200}
                                                         name="blog_short_description"
                                                         {...register("blog_short_description", { required: true })}
                                                     ></textarea>

@@ -445,6 +445,7 @@ function UpdateUpcomigEvents() {
                                                         fontSize: "16px",
                                                         borderRadius: 10,
                                                     }}
+                                                    maxLength={200}
                                                     name="event_short_description"
                                                     {...register("event_short_description", { required: true })}
                                                 ></textarea>

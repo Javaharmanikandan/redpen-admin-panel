@@ -459,6 +459,7 @@ function UpdateProducts() {
                                                         fontSize: "16px",
                                                         borderRadius: 10,
                                                     }}
+                                                    maxLength={200}
                                                     name="product_short_description"
                                                     {...register("product_short_description", { required: true })}
                                                 ></textarea>

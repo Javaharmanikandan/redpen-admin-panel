@@ -82,6 +82,8 @@ import UpdateEventBanner from "layouts/Events/UpdateEventBanner";
 import ViewSem from "layouts/Sem/ViewSem";
 import CreateSem from "layouts/Sem/CreateSem";
 import UpdateSem from "layouts/Sem/UpdateSem";
+import CreateBlogDesImage from "layouts/Blog/CreateBlogDesImage";
+import ViewBlogDesImage from "layouts/Blog/ViewBlogDesImage";
 
 
 const routes = [
@@ -361,6 +363,26 @@ const routes = [
     route: "/update-blog-category/:id",
     icon: <Shop size="18px" />,
     component: <UpdateBlogCategory />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "collapse",
+    name: "Blog Description Image",
+    key: "blog-description-image",
+    route: "/blog-description-image",
+    icon: <Shop size="18px" />,
+    component: <ViewBlogDesImage />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Blog Description Image",
+    key: "create-blog-description-image",
+    route: "/create-blog-description-image",
+    icon: <Shop size="18px" />,
+    component: <CreateBlogDesImage />,
     noCollapse: true,
     protected: true,
   },

@@ -170,7 +170,6 @@ function CreateProducts() {
       toast.error(dataPost.data.message);
     }
    
-    setInputList([{ also_content: "" }]);
     setLoad(false);
     setIsChecked(false);
   };

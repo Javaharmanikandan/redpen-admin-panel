@@ -84,6 +84,11 @@ import CreateSem from "layouts/Sem/CreateSem";
 import UpdateSem from "layouts/Sem/UpdateSem";
 import CreateBlogDesImage from "layouts/Blog/CreateBlogDesImage";
 import ViewBlogDesImage from "layouts/Blog/ViewBlogDesImage";
+import ViewPassCode from "layouts/Passcode/ViewPassCode";
+import CreatePassCode from "layouts/Passcode/CreatePassCode";
+import UpdatePassCodeProducts from "layouts/Passcode/UpdatePassCodeProducts";
+import CreatePassCodeProducts from "layouts/Passcode/CreatePassCodeProducts";
+import ViewPassCodeProducts from "layouts/Passcode/ViewPassCodeProducts";
 
 
 const routes = [
@@ -278,6 +283,36 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Pass code products",
+    key: "pass code products",
+    route: "/pass-code-products",
+    icon: <Shop size="18px" />,
+    component: <ViewPassCodeProducts />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Pass code products",
+    key: "create-pass-code-products",
+    route: "/create-pass-code-products",
+    icon: <Shop size="18px" />,
+    component: <CreatePassCodeProducts />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Pass code products",
+    key: "update-pass-code-products",
+    route: "/update-pass-code-products/:id",
+    icon: <Shop size="18px" />,
+    component: <UpdatePassCodeProducts />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "collapse",
     name: "Video Category",
     key: "video category",
     route: "/video-Category",
@@ -443,6 +478,27 @@ const routes = [
     route: "/update-sem/:id",
     icon: <Shop size="18px" />,
     component: <UpdateSem />,
+    noCollapse: true,
+    protected: true,
+  },
+
+  {
+    type: "collapse",
+    name: "Pass code",
+    key: "pass_code",
+    route: "/pass_code",
+    icon: <Shop size="18px" />,
+    component: <ViewPassCode />,
+    noCollapse: true,
+    protected: true,
+  },
+  {
+    type: "title",
+    name: "Create Pass Code",
+    key: "create-pass-code",
+    route: "/create-pass-code",
+    icon: <Shop size="18px" />,
+    component: <CreatePassCode />,
     noCollapse: true,
     protected: true,
   },

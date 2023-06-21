@@ -26,6 +26,7 @@ function CreateProducts() {
   const [productName, setProductName] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [load, setLoad] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const [inputList, setInputList] = useState([
     { also_content: "" },
   ]);
@@ -41,6 +42,19 @@ function CreateProducts() {
 
 
     console.log(inputList,"e")
+  };
+
+  //handle accept numbers
+  const handleNumberChange = (event) => {
+    const numericValue = event.target.value.replace(/[^0-9.]/g, ''); // Remove non-numeric characters
+    event.target.value = numericValue;
+  };
+
+  // handle clickcheckbox
+
+  const handleCheckboxChange = (event) => {
+    const isChecked = event.target.checked;
+    setIsChecked(isChecked);
   };
 
   // handle click event of the Remove button
@@ -139,6 +153,7 @@ function CreateProducts() {
     formData.append("product_short_description", data.product_short_description);
     formData.append("product_description", data.product_description);
     formData.append("product_url", data.product_url);
+    formData.append("pass_code_protection", data.pass_code_protection);
     formData.append("related_products", JSON.stringify(relatedProducts));
     formData.append("also_receive", JSON.stringify(inputList));
     formData.append("faq", JSON.stringify(inputListFaq));
@@ -157,6 +172,7 @@ function CreateProducts() {
    
     setInputList([{ also_content: "" }]);
     setLoad(false);
+    setIsChecked(false);
   };
 
 
@@ -310,8 +326,31 @@ function CreateProducts() {
                       </span>
                     )}
                   </SoftBox>
-                </Grid>
-                    <Grid item xs={12} sm={12} md={6} lg={6}>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={2} lg={2} >
+                      <SoftBox mb={2}  >
+                        <SoftBox mb={1} ml={0.5}>
+                          <SoftTypography
+                            component="label"
+                            variant="caption"
+                            fontWeight="bold"
+                          >
+                            Pass code protection
+                          </SoftTypography>
+                        </SoftBox>
+                        <SoftInput
+                          {...register("pass_code_protection", { required: false })}
+                          type="checkbox"
+                          value="1"
+                          name="pass_code_protection"
+                          onChange={handleCheckboxChange}
+                        />
+
+                      </SoftBox>
+                    </Grid>
+                    
+                    {!isChecked && 
+                    <><Grid item xs={12} sm={12} md={5} lg={5}>
                       <SoftBox mb={2}>
                         <SoftBox mb={1} ml={0.5}>
                           <SoftTypography
@@ -319,23 +358,21 @@ function CreateProducts() {
                             variant="caption"
                             fontWeight="bold"
                           >
-                             Payment link (INR)<span className="Errorspan">*</span>
+                             Payment link (INR)
                           </SoftTypography>
                         </SoftBox>
                         <SoftInput
-                          {...register("payment_link_inr", { required: true })}
+                          {...register("payment_link_inr", { required: false })}
                           type="text"
                           name="payment_link_inr"
                           placeholder="Payment link (INR)"
                         />
-                        {errors.payment_link_inr && (
-                          <span className="Errorspan">
-                            * Please fill this field!
-                          </span>
-                        )}
+
                       </SoftBox>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={6} lg={6}>
+                     
+
+                    <Grid item xs={12} sm={12} md={5} lg={5}>
                       <SoftBox mb={2}>
                         <SoftBox mb={1} ml={0.5}>
                           <SoftTypography
@@ -343,20 +380,16 @@ function CreateProducts() {
                             variant="caption"
                             fontWeight="bold"
                           >
-                            Payment link (USD)<span className="Errorspan">*</span>
+                            Payment link (USD)
                           </SoftTypography>
                         </SoftBox>
                         <SoftInput
-                          {...register("payment_link_usd", { required: true })}
+                          {...register("payment_link_usd", { required: false })}
                           type="text"
                           name="payment_link_usd"
                           placeholder="Payment link (USD)"
                         />
-                        {errors.payment_link_usd && (
-                          <span className="Errorspan">
-                            * Please fill this field!
-                          </span>
-                        )}
+
                       </SoftBox>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -367,20 +400,17 @@ function CreateProducts() {
                             variant="caption"
                             fontWeight="bold"
                           >
-                            Product Price (INR)<span className="Errorspan">*</span>
+                            Product Price (INR)
                           </SoftTypography>
                         </SoftBox>
                         <SoftInput
-                          {...register("product_price_inr", { required: true })}
-                          type="text"
+                          {...register("product_price_inr", { required: false })}
+                            type="text"
+                            onChange={handleNumberChange}
                           name="product_price_inr"
                           placeholder="Product Price (INR)"
                         />
-                        {errors.product_price_inr && (
-                          <span className="Errorspan">
-                            * Please fill this field!
-                          </span>
-                        )}
+   
                       </SoftBox>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -391,22 +421,20 @@ function CreateProducts() {
                             variant="caption"
                             fontWeight="bold"
                           >
-                            Product Price (USD)<span className="Errorspan">*</span>
+                            Product Price (USD)
                           </SoftTypography>
                         </SoftBox>
                         <SoftInput
-                          {...register("product_price_usd", { required: true })}
-                          type="text"
+                          {...register("product_price_usd", { required: false })}
+                            type="text"
+                            onChange={handleNumberChange}
                           name="product_price_usd"
                           placeholder="Product Price (USD)"
                         />
-                        {errors.product_price_usd && (
-                          <span className="Errorspan">
-                            * Please fill this field!
-                          </span>
-                        )}
+
                       </SoftBox>
                     </Grid>
+                      </>}
                     <Grid item xs={12} sm={12} md={12} lg={12}>
                       <SoftBox mb={2}>
                         <SoftBox mb={1} ml={0.5}>

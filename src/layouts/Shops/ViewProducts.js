@@ -87,7 +87,7 @@ function ViewProducts() {
                             alignItems="center"
                             p={3}
                         >
-                            <SoftTypography variant="h6">Video</SoftTypography>
+                            <SoftTypography variant="h6">Products</SoftTypography>
                             <Link to={"/create-products"}>
                                 {" "}
                                 <SoftButton
@@ -105,7 +105,8 @@ function ViewProducts() {
                                 <table id="example" className="table table-striped table-bordered " style={{ width: "100%", fontSize: "14px", alignItems: "center" }}>
                                     <thead>
                                         <tr>
-                                            <th className="text-center">Id</th>
+                                             <th className="text-center">Id</th>
+                                            <th className="text-center">Pass code protection</th>
                                             <th className="text-center">Category</th>
                                             <th className="text-center">Name</th>
                                             <th className="text-center">Image</th>
@@ -124,6 +125,7 @@ function ViewProducts() {
                                         {data.map((result, index) => {
                                             return (<tr key={index}>
                                                 <td>{index + 1}</td>
+                                                <td>{result.pass_code_protection ? 'Yes':'No'}</td>
                                                 <td>{result.shop_categories ? result.shop_categories.category_name:""}</td>
                                                 <td>{result.product_name}</td>
                                                 <td><img src={IMG_URL + result.product_image} width={75} height={75} /></td>
